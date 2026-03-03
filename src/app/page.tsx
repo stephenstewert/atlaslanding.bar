@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ContactForm } from "@/components/contact-form";
+import { SiteHeader } from "@/components/site-header";
 import { Separator } from "@/components/ui/separator";
 
 const assets = {
@@ -26,14 +27,14 @@ const assets = {
 };
 
 const cocktails = [
-  ["Blood Orange Spritz", "$12"],
-  ["Passionfruit Soda", "$12"],
-  ["Dazed and Confused", "$12"],
-  ["Spring Berry 75", "$12"],
-  ["Island Time", "$11"],
-  ["Atlas Landing Old Fashioned", "$12"],
-  ["Spicy Mule", "$12"],
-  ["Garden Refresher", "$12"]
+  ["Midnight 75", "$13"],
+  ["Passion Spark", "$13"],
+  ["Heatwave", "$13"],
+  ["Arancia Rossa", "$13"],
+  ["Golden Hour", "$14"],
+  ["Last Leaf", "$13"],
+  ["Harvest Honey", "$13"],
+  ["Altura", "$14"]
 ];
 
 const draftBeer = [
@@ -104,33 +105,21 @@ const hours = [
   "Sunday: Closed"
 ];
 
+function splitPrice(line: string) {
+  const match = line.match(/\s(\$\d+)\s*$/);
+  if (!match) {
+    return { name: line, price: "" };
+  }
+
+  const price = match[1];
+  const name = line.slice(0, line.length - match[0].length);
+  return { name, price };
+}
+
 export default function Home() {
   return (
     <main className="relative overflow-hidden">
-      <header className="fixed inset-x-0 top-0 z-50">
-        <nav className="motion-nav container mt-3 flex items-center justify-between rounded-full border border-linen/20 bg-gunmetal/75 px-4 py-2.5 backdrop-blur-md md:mt-4 md:px-5 md:py-3">
-          <Link href="#home" className="flex items-center gap-3">
-            <span className="rounded-full bg-linen/95 p-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
-              <Image
-                src={assets.logo}
-                alt="Atlas Landing"
-                width={48}
-                height={48}
-                className="h-12 w-12 rounded-full object-cover"
-                priority
-              />
-            </span>
-          </Link>
-          <div className="hidden items-center gap-7 text-sm md:flex">
-            <Link href="#story" className="text-linen/80 transition hover:text-linen">Story</Link>
-            <Link href="#visit" className="text-linen/80 transition hover:text-linen">Visit</Link>
-            <Link href="#contact" className="text-linen/80 transition hover:text-linen">Contact</Link>
-          </div>
-          <Button asChild size="sm" className="rounded-full px-4 md:px-5">
-            <Link href="#menu">Menu</Link>
-          </Button>
-        </nav>
-      </header>
+      <SiteHeader logoSrc={assets.logo} />
 
       <section id="home" className="relative min-h-screen">
         <Image
@@ -229,17 +218,17 @@ export default function Home() {
 
       <section className="motion-up border-y border-linen/15 bg-lobsterPink/20 py-4">
         <div className="container flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm uppercase tracking-[0.2em] text-sandDune">
-          <span>$2 Off Wine Flights</span>
+          <span>Happy Hour 3-5PM Mon-Thu</span>
           <span>•</span>
-          <span>Craft Cocktails</span>
+          <span>$2 Off Draft Beer</span>
           <span>•</span>
-          <span>Whiskey Flights</span>
+          <span>$8 Well Cocktails</span>
           <span>•</span>
           <span>Midtown Reno</span>
         </div>
       </section>
 
-      <section id="menu" className="container py-16 md:py-20">
+      <section id="menu" className="container py-14 md:py-16">
         <div className="mb-10 flex items-end justify-between gap-4">
           <div>
             <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Cocktail Menu</p>
@@ -262,53 +251,63 @@ export default function Home() {
         </Card>
       </section>
 
-      <section id="beer" className="container pb-16 md:pb-20">
-        <div className="mb-8">
-          <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Draft Beer</p>
-          <h2 className="font-display text-4xl text-linen md:text-5xl">On Tap</h2>
-        </div>
+      <section className="container pb-12 md:pb-16 lg:pb-12">
+        <div className="grid items-start gap-6 lg:grid-cols-2">
+          <article id="beer" className="lg:translate-y-10">
+            <div className="mb-8">
+              <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Draft Beer</p>
+              <h2 className="font-display text-4xl text-linen md:text-5xl">On Tap</h2>
+            </div>
 
-        <Card className="motion-up border-linen/20 bg-gunmetal/80">
-          <CardContent className="grid gap-x-10 gap-y-4 p-8 md:grid-cols-2">
-            {draftBeer.map(([name, price], idx) => (
-              <div key={name} className="motion-up flex items-end justify-between border-b border-linen/15 pb-3" style={{ animationDelay: `${idx * 50}ms` }}>
-                <p className="font-display text-2xl text-linen">{name}</p>
-                <p className="text-lg text-jungleTeal">{price}</p>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+            <Card className="motion-up border-linen/20 bg-gunmetal/80">
+              <CardContent className="grid gap-x-8 gap-y-4 p-6 md:grid-cols-2 md:p-8">
+                {draftBeer.map(([name, price], idx) => (
+                  <div key={name} className="motion-up flex items-end justify-between border-b border-linen/15 pb-3" style={{ animationDelay: `${idx * 50}ms` }}>
+                    <p className="font-display text-2xl text-linen">{name}</p>
+                    <p className="text-lg text-jungleTeal">{price}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </article>
+
+          <article id="spirits" className="lg:-translate-y-8">
+            <div className="mb-8">
+              <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Back Bar</p>
+              <h2 className="font-display text-4xl text-linen md:text-5xl">Spirits Selection</h2>
+            </div>
+
+            <Card className="motion-up border-linen/20 bg-gunmetal/80">
+              <CardContent className="grid gap-x-8 gap-y-6 p-6 md:grid-cols-2 md:p-8">
+                {spirits.map((group, idx) => (
+                  <div
+                    key={group.category}
+                    className="motion-up border-b border-linen/15 pb-5"
+                    style={{ animationDelay: `${idx * 50}ms` }}
+                  >
+                    <CardTitle className="mb-3 font-display text-3xl text-linen">
+                      {group.category}
+                    </CardTitle>
+                    <ul className="space-y-1.5 text-sm text-linen/85">
+                      {group.items.map((item) => {
+                        const { name, price } = splitPrice(item);
+                        return (
+                          <li key={item} className="flex items-center justify-between gap-4">
+                            <span>{name}</span>
+                            <span className="shrink-0 text-jungleTeal">{price}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </article>
+        </div>
       </section>
 
-      <section id="spirits" className="container pb-16 md:pb-20">
-        <div className="mb-8">
-          <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Back Bar</p>
-          <h2 className="font-display text-4xl text-linen md:text-5xl">Spirits Selection</h2>
-        </div>
-
-        <Card className="motion-up border-linen/20 bg-gunmetal/80">
-          <CardContent className="grid gap-x-10 gap-y-6 p-8 md:grid-cols-2">
-            {spirits.map((group, idx) => (
-              <div
-                key={group.category}
-                className="motion-up border-b border-linen/15 pb-5"
-                style={{ animationDelay: `${idx * 50}ms` }}
-              >
-                <CardTitle className="mb-3 font-display text-3xl text-linen">
-                  {group.category}
-                </CardTitle>
-                <ul className="space-y-1.5 text-sm text-linen/85">
-                  {group.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </section>
-
-      <section id="visit" className="container pb-20">
+      <section id="visit" className="container pb-20 lg:-mt-6">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
           <Card className="motion-up hover-lift border-linen/20 bg-gunmetal/85 text-linen">
             <CardHeader>

@@ -287,22 +287,26 @@ export default function Home() {
           <h2 className="font-display text-4xl text-linen md:text-5xl">Spirits Selection</h2>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          {spirits.map((group, idx) => (
-            <Card key={group.category} className="motion-up hover-lift border-linen/20 bg-gunmetal/80 text-linen" style={{ animationDelay: `${idx * 70}ms` }}>
-              <CardHeader className="pb-3">
-                <CardTitle className="font-display text-3xl">{group.category}</CardTitle>
-              </CardHeader>
-              <CardContent>
+        <Card className="motion-up border-linen/20 bg-gunmetal/80">
+          <CardContent className="grid gap-x-10 gap-y-6 p-8 md:grid-cols-2">
+            {spirits.map((group, idx) => (
+              <div
+                key={group.category}
+                className="motion-up border-b border-linen/15 pb-5"
+                style={{ animationDelay: `${idx * 50}ms` }}
+              >
+                <CardTitle className="mb-3 font-display text-3xl text-linen">
+                  {group.category}
+                </CardTitle>
                 <ul className="space-y-1.5 text-sm text-linen/85">
                   {group.items.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
       </section>
 
       <section id="visit" className="container pb-20">

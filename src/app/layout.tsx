@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
 
+import { DailyLoader } from "@/components/daily-loader";
+
 import "./globals.css";
 
 const manrope = Manrope({
@@ -74,6 +76,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${playfair.variable} antialiased`}>
+        <DailyLoader />
         {children}
       </body>
     </html>

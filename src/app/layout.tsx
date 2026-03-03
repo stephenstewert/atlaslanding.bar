@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
 
 import "./globals.css";
@@ -60,6 +60,10 @@ export const metadata: Metadata = {
     shortcut: "/favicon.png",
     apple: "/apple-touch-icon.png"
   }
+};
+
+export const viewport: Viewport = {
+  themeColor: "#242424"
 };
 
 export default function RootLayout({

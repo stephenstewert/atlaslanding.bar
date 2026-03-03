@@ -39,6 +39,10 @@ body {
   min-height: 100%;
 }
 
+html {
+  background-color: #242424;
+}
+
 body {
   @apply bg-background text-foreground font-sans;
   background:

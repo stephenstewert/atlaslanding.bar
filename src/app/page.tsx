@@ -16,9 +16,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { ContactForm } from "@/components/contact-form";
 import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
 
 const assets = {
   logo: "https://cdn.prod.website-files.com/643b06564581272492d75842/64ee88e0afb4f279136f0253_green%20logo.svg",
@@ -360,15 +359,7 @@ export default function Home() {
               </p>
             </CardHeader>
             <CardContent className="p-6 md:p-8">
-              <form action="/api/contact" method="post" className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <Input name="name" placeholder="Your name" required className="h-12 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
-                  <Input type="email" name="email" placeholder="Email" required className="h-12 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
-                </div>
-                <Input name="date" placeholder="Event date / timing (optional)" className="h-12 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
-                <Textarea name="message" placeholder="Tell us what you're planning" required className="min-h-36 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
-                <Button type="submit" size="lg" className="rounded-full px-8">Send Inquiry</Button>
-              </form>
+              <ContactForm />
             </CardContent>
           </div>
         </Card>

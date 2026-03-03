@@ -121,8 +121,8 @@ export default function Home() {
             <Link href="#visit" className="text-linen/80 transition hover:text-linen">Visit</Link>
             <Link href="#contact" className="text-linen/80 transition hover:text-linen">Contact</Link>
           </div>
-          <Button asChild size="sm" className="rounded-full px-4 md:px-5">
-            <Link href="#contact">Contact</Link>
+          <Button asChild size="sm" className="rounded-full px-4 md:hidden">
+            <Link href="#menu">Menu</Link>
           </Button>
         </nav>
       </header>

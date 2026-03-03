@@ -216,13 +216,13 @@ export default function Home() {
               </p>
             </CardContent>
           </Card>
-          <div className="motion-scale delay-1 overflow-hidden rounded-3xl border border-linen/20">
+          <div className="motion-scale delay-1 justify-self-end overflow-hidden rounded-3xl border border-linen/20 lg:max-w-[420px]">
             <Image
               src={assets.gallery}
               alt="Inside Atlas Landing"
               width={1200}
               height={1500}
-              className="aspect-[4/5] w-full object-cover"
+              className="aspect-[5/6] max-h-[420px] w-full object-cover"
             />
           </div>
         </div>

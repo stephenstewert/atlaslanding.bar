@@ -109,19 +109,25 @@ export default function Home() {
   return (
     <main className="relative overflow-hidden">
       <header className="fixed inset-x-0 top-0 z-50">
-        <nav className="container mt-3 flex items-center justify-between rounded-full border border-linen/20 bg-gunmetal/75 px-4 py-2.5 backdrop-blur-md md:mt-4 md:px-5 md:py-3">
+        <nav className="motion-nav container mt-3 flex items-center justify-between rounded-full border border-linen/20 bg-gunmetal/75 px-4 py-2.5 backdrop-blur-md md:mt-4 md:px-5 md:py-3">
           <Link href="#home" className="flex items-center gap-3">
-            <span className="rounded-full bg-linen/90 px-3 py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
-              <Image src={assets.logo} alt="Atlas Landing" width={110} height={36} className="h-8 w-auto" priority />
+            <span className="rounded-full bg-linen/95 p-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
+              <Image
+                src={assets.logo}
+                alt="Atlas Landing"
+                width={48}
+                height={48}
+                className="h-12 w-12 rounded-full object-cover"
+                priority
+              />
             </span>
           </Link>
           <div className="hidden items-center gap-7 text-sm md:flex">
             <Link href="#story" className="text-linen/80 transition hover:text-linen">Story</Link>
-            <Link href="#menu" className="text-linen/80 transition hover:text-linen">Menu</Link>
             <Link href="#visit" className="text-linen/80 transition hover:text-linen">Visit</Link>
             <Link href="#contact" className="text-linen/80 transition hover:text-linen">Contact</Link>
           </div>
-          <Button asChild size="sm" className="rounded-full px-4 md:hidden">
+          <Button asChild size="sm" className="rounded-full px-4 md:px-5">
             <Link href="#menu">Menu</Link>
           </Button>
         </nav>
@@ -140,19 +146,19 @@ export default function Home() {
 
         <div className="container relative z-10 flex min-h-screen items-end pb-14 pt-28 md:items-center md:pb-0 md:pt-36">
           <div className="max-w-4xl">
-            <Badge className="mb-6 rounded-full bg-secondary/90 px-4 py-1 text-secondary-foreground">
+            <Badge className="motion-up mb-6 rounded-full bg-secondary/90 px-4 py-1 text-secondary-foreground">
               Midtown Reno
             </Badge>
-            <h1 className="font-display text-4xl leading-[0.95] text-linen sm:text-5xl md:text-8xl">
+            <h1 className="motion-up delay-1 font-display text-4xl leading-[0.95] text-linen sm:text-5xl md:text-8xl">
               Where late nights
               <br />
               pour better.
             </h1>
-            <p className="mt-5 max-w-2xl text-base text-linen/85 md:mt-6 md:text-lg">
+            <p className="motion-up delay-2 mt-5 max-w-2xl text-base text-linen/85 md:mt-6 md:text-lg">
               Atlas Landing is a cocktail and wine bar built for long conversations,
               deep playlists, and one-more-round energy.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3 md:mt-8">
+            <div className="motion-up delay-3 mt-7 flex flex-wrap gap-3 md:mt-8">
               <Button asChild size="lg" className="w-full rounded-full px-8 sm:w-auto">
                 <Link href="#menu">View Cocktails</Link>
               </Button>
@@ -171,19 +177,19 @@ export default function Home() {
 
       <section className="container relative z-20 -mt-10 pb-16 md:-mt-12 md:pb-20">
         <div className="grid gap-4 md:grid-cols-3">
-          <Card className="border-lobsterPink/40 bg-gunmetal/80">
+          <Card className="motion-up hover-lift border-lobsterPink/40 bg-gunmetal/80">
             <CardContent className="p-6 text-linen">
               <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune"><Sparkles className="h-4 w-4" /> Signature Program</p>
               <p className="text-2xl font-display">Seasonal cocktails + classic flights</p>
             </CardContent>
           </Card>
-          <Card className="border-jungleTeal/40 bg-gunmetal/80">
+          <Card className="motion-up delay-1 hover-lift border-jungleTeal/40 bg-gunmetal/80">
             <CardContent className="p-6 text-linen">
               <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune"><Music4 className="h-4 w-4" /> Atmosphere</p>
               <p className="text-2xl font-display">Moody lighting, vinyl energy, intimate tables</p>
             </CardContent>
           </Card>
-          <Card className="border-lobsterPink/40 bg-gunmetal/80">
+          <Card className="motion-up delay-2 hover-lift border-lobsterPink/40 bg-gunmetal/80">
             <CardContent className="p-6 text-linen">
               <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune"><Users className="h-4 w-4" /> Community</p>
               <p className="text-2xl font-display">Neighborhood regulars and first dates alike</p>
@@ -194,7 +200,7 @@ export default function Home() {
 
       <section id="story" className="container pb-16 md:pb-20">
         <div className="grid items-start gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <Card className="border-linen/20 bg-gunmetal/85 text-linen">
+          <Card className="motion-up hover-lift border-linen/20 bg-gunmetal/85 text-linen">
             <CardHeader>
               <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Atlas Landing</p>
               <CardTitle className="font-display text-3xl sm:text-4xl md:text-5xl">A Midtown bar with real personality.</CardTitle>
@@ -210,7 +216,7 @@ export default function Home() {
               </p>
             </CardContent>
           </Card>
-          <div className="overflow-hidden rounded-3xl border border-linen/20">
+          <div className="motion-scale delay-1 overflow-hidden rounded-3xl border border-linen/20">
             <Image
               src={assets.gallery}
               alt="Inside Atlas Landing"
@@ -222,7 +228,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-linen/15 bg-lobsterPink/20 py-4">
+      <section className="motion-up border-y border-linen/15 bg-lobsterPink/20 py-4">
         <div className="container flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm uppercase tracking-[0.2em] text-sandDune">
           <span>$2 Off Wine Flights</span>
           <span>•</span>
@@ -243,10 +249,10 @@ export default function Home() {
           <Badge variant="outline" className="hidden border-linen/30 text-linen sm:inline-flex">Seasonal updates</Badge>
         </div>
 
-        <Card className="border-linen/20 bg-gunmetal/80">
+        <Card className="motion-up border-linen/20 bg-gunmetal/80">
           <CardContent className="grid gap-x-10 gap-y-4 p-8 md:grid-cols-2">
-            {cocktails.map(([name, price]) => (
-              <div key={name} className="flex items-end justify-between border-b border-linen/15 pb-3">
+            {cocktails.map(([name, price], idx) => (
+              <div key={name} className="motion-up flex items-end justify-between border-b border-linen/15 pb-3" style={{ animationDelay: `${idx * 60}ms` }}>
                 <div>
                   <p className="font-display text-2xl text-linen">{name}</p>
                 </div>
@@ -263,10 +269,10 @@ export default function Home() {
           <h2 className="font-display text-4xl text-linen md:text-5xl">On Tap</h2>
         </div>
 
-        <Card className="border-linen/20 bg-gunmetal/80">
+        <Card className="motion-up border-linen/20 bg-gunmetal/80">
           <CardContent className="grid gap-x-10 gap-y-4 p-8 md:grid-cols-2">
-            {draftBeer.map(([name, price]) => (
-              <div key={name} className="flex items-end justify-between border-b border-linen/15 pb-3">
+            {draftBeer.map(([name, price], idx) => (
+              <div key={name} className="motion-up flex items-end justify-between border-b border-linen/15 pb-3" style={{ animationDelay: `${idx * 50}ms` }}>
                 <p className="font-display text-2xl text-linen">{name}</p>
                 <p className="text-lg text-jungleTeal">{price}</p>
               </div>
@@ -282,8 +288,8 @@ export default function Home() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
-          {spirits.map((group) => (
-            <Card key={group.category} className="border-linen/20 bg-gunmetal/80 text-linen">
+          {spirits.map((group, idx) => (
+            <Card key={group.category} className="motion-up hover-lift border-linen/20 bg-gunmetal/80 text-linen" style={{ animationDelay: `${idx * 70}ms` }}>
               <CardHeader className="pb-3">
                 <CardTitle className="font-display text-3xl">{group.category}</CardTitle>
               </CardHeader>
@@ -301,7 +307,7 @@ export default function Home() {
 
       <section id="visit" className="container pb-20">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-          <Card className="border-linen/20 bg-gunmetal/85 text-linen">
+          <Card className="motion-up hover-lift border-linen/20 bg-gunmetal/85 text-linen">
             <CardHeader>
               <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Visit Us</p>
               <CardTitle className="font-display text-3xl md:text-4xl">772 S Virginia St, Reno, NV 89509</CardTitle>
@@ -326,7 +332,7 @@ export default function Home() {
             </CardContent>
           </Card>
 
-          <div className="overflow-hidden rounded-3xl border border-linen/20">
+          <div className="motion-scale delay-1 overflow-hidden rounded-3xl border border-linen/20">
             <iframe
               title="Atlas Landing map"
               src="https://www.google.com/maps?q=772+S+Virginia+St,+Reno,+NV+89509&output=embed"
@@ -339,7 +345,7 @@ export default function Home() {
       </section>
 
       <section id="contact" className="container pb-20">
-        <Card className="border-linen/20 bg-gunmetal/90 text-linen">
+        <Card className="motion-up border-linen/20 bg-gunmetal/90 text-linen">
           <div className="grid md:grid-cols-[1fr_1.1fr]">
             <CardHeader className="border-b border-linen/15 md:border-b-0 md:border-r">
               <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Events & Inquiries</p>

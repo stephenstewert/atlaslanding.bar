@@ -37,6 +37,64 @@ const cocktails = [
   ["Garden Refresher", "$12"]
 ];
 
+const draftBeer = [
+  ["Boneyard RPM IPA", "$7"],
+  ["Coronado Weekend Vibes IPA", "$7"],
+  ["Deschutes King Crispy Pilsner", "$6"],
+  ["Hazy Lil Thing IPA", "$7"],
+  ["Revision Double IPA", "$7"],
+  ["805 Cerveza", "$6"],
+  ["805 Blonde", "$6"],
+  ["Pigeon Head Pilsner", "$6"],
+  ["Sierra Nevada Oktoberfest Amber", "$6"],
+  ["Cali Squeeze Blood Orange", "$6"],
+  ["Stiegl Grapefruit Radler", "$6"],
+  ["Ace Pink Guava Cider", "$6"]
+];
+
+const spirits = [
+  {
+    category: "Gin",
+    items: ["Nolet's $12", "Hendrick's Neptunia $12", "Hendrick's $11", "Gray Whale $9", "Theory 002 $9", "Russell Henry $9", "Empress $9", "Malfy Italian Lemon $8", "Aviation $8", "Few $8", "Tanqueray $8", "Bombay Sapphire $8"]
+  },
+  {
+    category: "Vodka",
+    items: ["Elit Eighteen $11", "Ketel One Grapefruit and Rose $9", "Ketel One Cucumber and Mint $9", "Absolut Elyx $9", "Grey Goose $9", "Ketel One $8", "Source One Oak Sherry Casks $8", "Hera the Dog $8", "Tahoe Blue $8", "Tito's $8"]
+  },
+  {
+    category: "Tequila",
+    items: ["Casa Dragones Anejo $15", "Casa Dragones Blanco $13", "El Sativo Anejo $13", "El Sativo Reposado $12", "Casamigos Reposado $13", "Casamigos Blanco $11", "Fortaleza Blanco $11", "El Sativo Blanco $10", "Herradura Reposado $10", "Puntagave Blanco $10", "Casa Noble Blanco $9", "Cazadores Reposado $8"]
+  },
+  {
+    category: "Rum",
+    items: ["Four Square Empery Single Blended Rum $20", "Four Square 2007 Single Blended Rum $15", "Opthimus 21 Year Rum $15", "Don Q Double Aged Puerto Rican Rum $14", "Centenario 20 Year $12", "Four Square Zinfandel Cask Blend $11", "Plantation Pineapple Rum $8", "Clement Single Barrel Caribbean Rum $8", "Don Q Oak Barrel Spiced $8", "Smith and Cross Jamaica Rum $7"]
+  },
+  {
+    category: "Irish Whiskey",
+    items: ["Redbreast 12 Year $15", "Green Spot $15", "Writer's Tears $12", "Knappogue 12 Year $10", "Jameson $8"]
+  },
+  {
+    category: "Japanese Whiskey",
+    items: ["Suntory Hakushu 12 Year $35", "Nikka Single Malt Yoichi $30", "Yamazaki 12 Year $25", "Nikka From the Barrel $11", "Iwai Mars Whisky $10", "Nikka Coffey Grain Whisky $9", "Suntory Toki $8"]
+  },
+  {
+    category: "Bourbon",
+    items: ["Michter's Single Barrel 10 $55", "Elijah Craig $35", "Clyde May's 10 Year $25", "Wild Turkey Decades $25", "Blood Oath Pact No.6 $22", "Blood Oath Pact No.4 $20", "Little Book Chapter 03: The Road Home $20", "Blanton's $18", "Eagle Rare $18", "Little Book Chapter 02: No Simple Task $17", "Weller Special Reserve $15", "Rebel Yell Single Barrel 10 Year $14", "Wild Turkey Kentucky Spirit Single Barrel $14", "Four Roses Single Barrel $12", "Basil Hayden Toast $12", "Clyde May's $12", "Wild Turkey Rare Breed $12", "Bulleit 10 Year $11", "Larceny $11", "The Wiseman $11", "Broken Barrel Cask Strength $11", "Uncle Nearest 1884 $10", "Baker's 7 Year $9", "Frey Ranch $9", "Woodford Reserve $9", "Broken Barrel California Oak $9", "Whistle Pig Piggyback $9", "Basil Hayden $9", "Howler Head Banana Whiskey $9", "Four Roses Small Batch Select $9", "Maker's Mark $8", "Pendleton $8"]
+  },
+  {
+    category: "Rye",
+    items: ["Peerless Rye $25", "Whistle Pig Roadstock $20", "Barrel Rye $15", "Angel's Envy $15", "Basil Hayden Dark Rye $12", "Frey Ranch $12", "Sazerac $9", "Bulleit $8"]
+  },
+  {
+    category: "Scotch",
+    items: ["Glenlivet Nadurra 16 Year $35", "Jura Single Malt 18 Year $22", "Baller Single Malt $20", "Aultmore Speyside Single Malt 12 Year $20", "Bunnahabhain Islay Single Malt 18 Year $20", "Springbank 15 Year $20", "Lagavulin 8 Year $15", "Drambuie 15 Year $14", "Highland Park Valkyrie $12", "Auchentoshan The Bartenders Malt $12", "Johnnie Walker Green Label 15 Year Blended Malt $10", "Glenfiddich Single Malt 12 Year $9", "The Glenrothes Select Reserve Speyside Single Malt $7"]
+  },
+  {
+    category: "Misc.",
+    items: ["Crown Royal Noble Collection $11", "Screwball Peanut Butter Whiskey $9", "Ballotin Caramel Turtle Whisky $9", "Jack Daniel's Sour Mash $7", "Jameson $8"]
+  }
+];
+
 const hours = [
   "Monday: 3pm - 10pm",
   "Tuesday: 3pm - 10pm",
@@ -197,6 +255,48 @@ export default function Home() {
             ))}
           </CardContent>
         </Card>
+      </section>
+
+      <section id="beer" className="container pb-16 md:pb-20">
+        <div className="mb-8">
+          <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Draft Beer</p>
+          <h2 className="font-display text-4xl text-linen md:text-5xl">On Tap</h2>
+        </div>
+
+        <Card className="border-linen/20 bg-gunmetal/80">
+          <CardContent className="grid gap-x-10 gap-y-4 p-8 md:grid-cols-2">
+            {draftBeer.map(([name, price]) => (
+              <div key={name} className="flex items-end justify-between border-b border-linen/15 pb-3">
+                <p className="font-display text-2xl text-linen">{name}</p>
+                <p className="text-lg text-jungleTeal">{price}</p>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </section>
+
+      <section id="spirits" className="container pb-16 md:pb-20">
+        <div className="mb-8">
+          <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Back Bar</p>
+          <h2 className="font-display text-4xl text-linen md:text-5xl">Spirits Selection</h2>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {spirits.map((group) => (
+            <Card key={group.category} className="border-linen/20 bg-gunmetal/80 text-linen">
+              <CardHeader className="pb-3">
+                <CardTitle className="font-display text-3xl">{group.category}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-1.5 text-sm text-linen/85">
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </section>
 
       <section id="visit" className="container pb-20">

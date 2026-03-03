@@ -3,25 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --background: 218 24% 9%;
-  --foreground: 32 33% 96%;
-  --card: 220 28% 12%;
-  --card-foreground: 32 33% 96%;
-  --popover: 220 28% 12%;
-  --popover-foreground: 32 33% 96%;
-  --primary: 35 85% 62%;
-  --primary-foreground: 220 33% 8%;
-  --secondary: 217 19% 20%;
-  --secondary-foreground: 30 24% 92%;
-  --muted: 220 16% 18%;
-  --muted-foreground: 28 14% 70%;
-  --accent: 208 50% 25%;
-  --accent-foreground: 32 33% 96%;
+  --gunmetal: 0 0% 24%;
+  --lobster-pink: 4 35% 56%;
+  --jungle-teal: 162 26% 45%;
+  --sand-dune: 38 43% 84%;
+  --linen: 30 100% 96%;
+  --background: var(--gunmetal);
+  --foreground: var(--linen);
+  --card: 0 0% 20%;
+  --card-foreground: var(--linen);
+  --popover: 0 0% 20%;
+  --popover-foreground: var(--linen);
+  --primary: var(--lobster-pink);
+  --primary-foreground: var(--linen);
+  --secondary: var(--jungle-teal);
+  --secondary-foreground: var(--linen);
+  --muted: 0 0% 30%;
+  --muted-foreground: var(--sand-dune);
+  --accent: var(--sand-dune);
+  --accent-foreground: var(--gunmetal);
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 98%;
-  --border: 220 20% 24%;
-  --input: 220 20% 24%;
-  --ring: 35 85% 62%;
+  --border: 38 20% 70%;
+  --input: 38 20% 70%;
+  --ring: var(--jungle-teal);
   --radius: 1rem;
 }
 
@@ -37,9 +42,9 @@ body {
 body {
   @apply bg-background text-foreground font-sans;
   background:
-    radial-gradient(circle at 10% 10%, rgba(122, 166, 214, 0.22), transparent 40%),
-    radial-gradient(circle at 90% 0%, rgba(184, 139, 74, 0.2), transparent 35%),
-    linear-gradient(120deg, #0f131d 0%, #16131a 45%, #3d3d3d 140%);
+    radial-gradient(circle at 12% 14%, rgba(183, 109, 104, 0.24), transparent 38%),
+    radial-gradient(circle at 86% 8%, rgba(85, 145, 127, 0.2), transparent 32%),
+    linear-gradient(140deg, #242424 0%, #3d3d3d 45%, #2f2f2f 100%);
 }
 
 section {
@@ -49,8 +54,8 @@ section {
 .glass {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.03) 100%
+    rgba(255, 244, 233, 0.08) 0%,
+    rgba(255, 244, 233, 0.03) 100%
   );
   backdrop-filter: blur(14px);
 }

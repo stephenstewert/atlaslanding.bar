@@ -3,12 +3,13 @@ import Link from "next/link";
 import {
   Clock3,
   Facebook,
-  GlassWater,
   Instagram,
   Mail,
   MapPin,
+  Music4,
   Phone,
-  Ticket,
+  Sparkles,
+  Users,
   Wine
 } from "lucide-react";
 
@@ -21,57 +22,19 @@ import { Textarea } from "@/components/ui/textarea";
 
 const assets = {
   logo: "https://cdn.prod.website-files.com/643b06564581272492d75842/66e22665893360296137d79f_atlasdark.png",
-  hero: "https://cdn.prod.website-files.com/643b06564581272492d75842/66e384bba07e40107a7b066f_IMG_2684%203-2.jpg"
+  hero: "https://cdn.prod.website-files.com/643b06564581272492d75842/64aeefdd6b8c0c941a3baee4_IMG_1924-min.JPG",
+  gallery: "https://cdn.prod.website-files.com/643b06564581272492d75842/66e384bba07e40107a7b066f_IMG_2684%203-2.jpg"
 };
 
 const cocktails = [
-  {
-    name: "Blood Orange Spritz",
-    price: "$12",
-    desc: "Aperol, Prosecco, San Pellegrino Aranciata Rosa, sparkling water"
-  },
-  {
-    name: "Passionfruit Soda",
-    price: "$12",
-    desc: "Skyy Vodka, Passoa, lime, agave, sparkling water"
-  },
-  {
-    name: "Dazed and Confused",
-    price: "$12",
-    desc: "Sazerac Rye, stone fruit, lime, simple"
-  },
-  {
-    name: "Spring Berry 75",
-    price: "$12",
-    desc: "Gray Whale Gin, lemon, blackberry puree, Prosecco"
-  },
-  {
-    name: "Island Time",
-    price: "$11",
-    desc: "Hawaiian white ginger infused gin, Fever Tree tonic"
-  },
-  {
-    name: "Atlas Landing Old Fashioned",
-    price: "$12",
-    desc: "Buffalo Trace Bourbon, maraschino, absinthe, bitters"
-  },
-  {
-    name: "Spicy Mule",
-    price: "$12",
-    desc: "Astral Tequila, lime, ginger beer, jalapeno"
-  },
-  {
-    name: "Garden Refresher",
-    price: "$12",
-    desc: "Ketel Cucumber Mint Vodka, mint, lemon, sparkling water, iced tea"
-  }
-];
-
-const flights = [
-  "Wine flights from $15 (red, white, bubbles, cabernet)",
-  "Whiskey flights from $14 (bourbon, scotch, irish, japanese)",
-  "Beer lineup rotates with local + classic pours",
-  "Seasonal cocktail menu updates throughout the year"
+  ["Blood Orange Spritz", "$12"],
+  ["Passionfruit Soda", "$12"],
+  ["Dazed and Confused", "$12"],
+  ["Spring Berry 75", "$12"],
+  ["Island Time", "$11"],
+  ["Atlas Landing Old Fashioned", "$12"],
+  ["Spicy Mule", "$12"],
+  ["Garden Refresher", "$12"]
 ];
 
 const hours = [
@@ -87,125 +50,178 @@ const hours = [
 export default function Home() {
   return (
     <main className="relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_0%_20%,rgba(194,156,102,0.2),transparent_45%)]" />
-
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#111722]/90 backdrop-blur-xl">
-        <nav className="container flex h-16 items-center justify-between">
-          <Link href="#home" className="flex items-center">
-            <Image src={assets.logo} alt="Atlas Landing" width={150} height={48} className="h-9 w-auto" priority />
+      <header className="fixed inset-x-0 top-0 z-50">
+        <nav className="container mt-4 flex items-center justify-between rounded-full border border-linen/20 bg-gunmetal/75 px-5 py-3 backdrop-blur-md">
+          <Link href="#home" className="flex items-center gap-3">
+            <Image src={assets.logo} alt="Atlas Landing" width={110} height={36} className="h-8 w-auto" priority />
           </Link>
-          <div className="hidden items-center gap-8 text-sm md:flex">
-            <Link href="#menu" className="transition-colors hover:text-primary">Menu</Link>
-            <Link href="#visit" className="transition-colors hover:text-primary">Visit</Link>
-            <Link href="#contact" className="transition-colors hover:text-primary">Contact</Link>
+          <div className="hidden items-center gap-7 text-sm md:flex">
+            <Link href="#story" className="text-linen/80 transition hover:text-linen">Story</Link>
+            <Link href="#menu" className="text-linen/80 transition hover:text-linen">Menu</Link>
+            <Link href="#visit" className="text-linen/80 transition hover:text-linen">Visit</Link>
+            <Link href="#contact" className="text-linen/80 transition hover:text-linen">Contact</Link>
           </div>
-          <Button asChild size="sm"><Link href="#contact">Get In Touch</Link></Button>
+          <Button asChild size="sm" className="rounded-full px-5">
+            <Link href="#contact">Reserve</Link>
+          </Button>
         </nav>
       </header>
 
-      <section id="home" className="container py-8 md:py-12">
-        <div className="relative overflow-hidden rounded-[2rem] border border-white/15">
-          <Image src={assets.hero} alt="Atlas Landing bar interior" width={2200} height={1500} className="h-[74vh] w-full object-cover" priority />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#10131d] to-transparent" />
+      <section id="home" className="relative min-h-screen">
+        <Image
+          src={assets.hero}
+          alt="Atlas Landing hero"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-gunmetal" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(183,109,104,0.25),transparent_45%)]" />
 
-          <div className="absolute bottom-0 left-0 max-w-3xl p-6 md:p-12">
-            <Badge variant="secondary" className="mb-4 border-white/20 bg-white/15 tracking-[0.2em] uppercase">Midtown Reno</Badge>
-            <h1 className="font-display text-5xl leading-[0.95] text-white md:text-7xl">
-              Atlas Landing
+        <div className="container relative z-10 flex min-h-screen items-end pb-16 pt-36 md:items-center md:pb-0">
+          <div className="max-w-4xl">
+            <Badge className="mb-6 rounded-full bg-secondary/90 px-4 py-1 text-secondary-foreground">
+              Midtown Reno
+            </Badge>
+            <h1 className="font-display text-5xl leading-[0.92] text-linen md:text-8xl">
+              Where late nights
+              <br />
+              pour better.
             </h1>
-            <p className="mt-4 max-w-xl text-base text-white/85 md:text-lg">
-              Cozy neighborhood bar with craft cocktails, wine flights, whiskey flights,
-              and rotating beer in the heart of Midtown.
+            <p className="mt-6 max-w-2xl text-lg text-linen/85">
+              Atlas Landing is a cocktail and wine bar built for long conversations,
+              deep playlists, and one-more-round energy.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Button asChild size="lg"><Link href="#menu">See Menu Highlights</Link></Button>
-              <Button asChild variant="outline" size="lg" className="border-white/30 bg-black/20 text-white hover:bg-black/30">
-                <Link href="#visit">Plan Your Visit</Link>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg" className="rounded-full px-8">
+                <Link href="#menu">View Cocktails</Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="rounded-full border-linen/40 bg-black/20 px-8 text-linen hover:bg-black/35"
+              >
+                <Link href="#visit">Get Directions</Link>
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="menu" className="container py-16">
+      <section className="container -mt-12 relative z-20 pb-20">
+        <div className="grid gap-4 md:grid-cols-3">
+          <Card className="border-lobsterPink/40 bg-gunmetal/80">
+            <CardContent className="p-6 text-linen">
+              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune"><Sparkles className="h-4 w-4" /> Signature Program</p>
+              <p className="text-2xl font-display">Seasonal cocktails + classic flights</p>
+            </CardContent>
+          </Card>
+          <Card className="border-jungleTeal/40 bg-gunmetal/80">
+            <CardContent className="p-6 text-linen">
+              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune"><Music4 className="h-4 w-4" /> Atmosphere</p>
+              <p className="text-2xl font-display">Moody lighting, vinyl energy, intimate tables</p>
+            </CardContent>
+          </Card>
+          <Card className="border-lobsterPink/40 bg-gunmetal/80">
+            <CardContent className="p-6 text-linen">
+              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune"><Users className="h-4 w-4" /> Community</p>
+              <p className="text-2xl font-display">Neighborhood regulars and first dates alike</p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <section id="story" className="container pb-20">
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <Card className="border-linen/20 bg-gunmetal/85 text-linen">
+            <CardHeader>
+              <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Atlas Landing</p>
+              <CardTitle className="font-display text-5xl">A Midtown bar with real personality.</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 text-linen/85">
+              <p>
+                We focus on cocktails, beer, wine, and whiskey flights without feeling formal.
+                The room is warm, the menu rotates, and the soundtrack keeps the pace all night.
+              </p>
+              <p>
+                From opening pours to last call, Atlas is built for people who want a better
+                neighborhood bar experience.
+              </p>
+            </CardContent>
+          </Card>
+          <div className="overflow-hidden rounded-3xl border border-linen/20">
+            <Image
+              src={assets.gallery}
+              alt="Inside Atlas Landing"
+              width={1200}
+              height={1500}
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-linen/15 bg-lobsterPink/20 py-4">
+        <div className="container flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm uppercase tracking-[0.2em] text-sandDune">
+          <span>$2 Off Wine Flights</span>
+          <span>•</span>
+          <span>Craft Cocktails</span>
+          <span>•</span>
+          <span>Whiskey Flights</span>
+          <span>•</span>
+          <span>Midtown Reno</span>
+        </div>
+      </section>
+
+      <section id="menu" className="container py-20">
         <div className="mb-10 flex items-end justify-between gap-4">
           <div>
-            <p className="mb-2 text-xs uppercase tracking-[0.3em] text-primary">Cocktail Menu</p>
-            <h2 className="font-display text-4xl md:text-5xl">Current Signatures</h2>
+            <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Cocktail Menu</p>
+            <h2 className="font-display text-5xl text-linen">Now Pouring</h2>
           </div>
-          <Badge variant="outline" className="hidden border-primary/40 text-primary sm:inline-flex">Seasonal changes apply</Badge>
+          <Badge variant="outline" className="border-linen/30 text-linen">Seasonal updates</Badge>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {cocktails.map((item, idx) => (
-            <Card key={item.name} className="glass reveal border-white/15" style={{ animationDelay: `${idx * 80}ms` }}>
-              <CardHeader className="pb-3">
-                <div className="mb-2 flex items-center justify-between">
-                  <CardTitle className="text-2xl">{item.name}</CardTitle>
-                  <span className="font-display text-xl text-primary">{item.price}</span>
+        <Card className="border-linen/20 bg-gunmetal/80">
+          <CardContent className="grid gap-x-10 gap-y-4 p-8 md:grid-cols-2">
+            {cocktails.map(([name, price]) => (
+              <div key={name} className="flex items-end justify-between border-b border-linen/15 pb-3">
+                <div>
+                  <p className="font-display text-2xl text-linen">{name}</p>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <Card className="mt-8 border-white/15 bg-charcoal/60">
-          <CardHeader>
-            <CardTitle className="text-3xl">Flights + Program Notes</CardTitle>
-          </CardHeader>
-          <CardContent className="grid gap-3 md:grid-cols-2">
-            {flights.map((item) => (
-              <div key={item} className="flex items-center gap-3 rounded-xl border border-white/15 bg-black/20 p-3 text-sm">
-                <Wine className="h-4 w-4 text-primary" />
-                <span>{item}</span>
+                <p className="text-lg text-lobsterPink">{price}</p>
               </div>
             ))}
           </CardContent>
         </Card>
       </section>
 
-      <section id="visit" className="container py-10">
+      <section id="visit" className="container pb-20">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-          <Card className="glass border-white/15">
+          <Card className="border-linen/20 bg-gunmetal/85 text-linen">
             <CardHeader>
-              <p className="text-xs uppercase tracking-[0.3em] text-primary">Location</p>
-              <CardTitle className="text-4xl">772 S Virginia St, Reno, NV 89509</CardTitle>
+              <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Visit Us</p>
+              <CardTitle className="font-display text-4xl">772 S Virginia St, Reno, NV 89509</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-5">
-              <p className="flex items-center gap-3 text-sm text-muted-foreground"><Phone className="h-4 w-4 text-primary" />(775) 273-8146</p>
-              <p className="flex items-center gap-3 text-sm text-muted-foreground"><Mail className="h-4 w-4 text-primary" />info@atlaslanding.bar</p>
-              <p className="flex items-start gap-3 text-sm text-muted-foreground"><Clock3 className="mt-0.5 h-4 w-4 text-primary" />
-                <span>{hours.join(" | ")}</span>
-              </p>
-
-              <Separator className="bg-white/10" />
-
-              <div className="grid gap-3 text-sm">
-                <Link href="http://maps.apple.com/?daddr=772+S+Virginia+St,+Reno+NV" target="_blank" className="inline-flex items-center gap-2 text-primary hover:text-primary/80">
-                  <MapPin className="h-4 w-4" />Open in Maps
-                </Link>
-                <Link href="https://www.instagram.com/atlaslanding/" target="_blank" className="inline-flex items-center gap-2 text-primary hover:text-primary/80">
-                  <Instagram className="h-4 w-4" />@atlaslanding
-                </Link>
-                <Link href="https://www.facebook.com/profile.php?id=100095380789651" target="_blank" className="inline-flex items-center gap-2 text-primary hover:text-primary/80">
-                  <Facebook className="h-4 w-4" />Facebook
-                </Link>
-                <Link href="https://www.yelp.com/biz/atlas-landing-reno-2" target="_blank" className="inline-flex items-center gap-2 text-primary hover:text-primary/80">
-                  <GlassWater className="h-4 w-4" />Yelp
-                </Link>
+            <CardContent className="space-y-5 text-sm text-linen/85">
+              <p className="flex items-center gap-3"><Phone className="h-4 w-4 text-jungleTeal" />(775) 273-8146</p>
+              <p className="flex items-center gap-3"><Mail className="h-4 w-4 text-jungleTeal" />info@atlaslanding.bar</p>
+              <p className="flex items-start gap-3"><Clock3 className="mt-0.5 h-4 w-4 text-jungleTeal" /><span>{hours.join(" | ")}</span></p>
+              <Separator className="bg-linen/20" />
+              <div className="grid gap-3">
+                <Link href="http://maps.apple.com/?daddr=772+S+Virginia+St,+Reno+NV" target="_blank" className="inline-flex items-center gap-2 text-sandDune hover:text-linen"><MapPin className="h-4 w-4" />Open in Maps</Link>
+                <Link href="https://www.instagram.com/atlaslanding/" target="_blank" className="inline-flex items-center gap-2 text-sandDune hover:text-linen"><Instagram className="h-4 w-4" />@atlaslanding</Link>
+                <Link href="https://www.facebook.com/profile.php?id=100095380789651" target="_blank" className="inline-flex items-center gap-2 text-sandDune hover:text-linen"><Facebook className="h-4 w-4" />Facebook</Link>
               </div>
             </CardContent>
           </Card>
 
-          <div className="overflow-hidden rounded-3xl border border-white/15">
+          <div className="overflow-hidden rounded-3xl border border-linen/20">
             <iframe
               title="Atlas Landing map"
               src="https://www.google.com/maps?q=772+S+Virginia+St,+Reno,+NV+89509&output=embed"
-              className="h-full min-h-[420px] w-full"
+              className="h-full min-h-[430px] w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
@@ -213,29 +229,26 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="container pb-20 pt-14">
-        <Card className="glass border-white/15">
-          <div className="grid md:grid-cols-[0.9fr_1.1fr]">
-            <CardHeader className="border-b border-white/10 bg-black/20 md:border-b-0 md:border-r">
-              <p className="text-xs uppercase tracking-[0.3em] text-primary">Contact</p>
-              <CardTitle className="text-4xl">Book a table, group, or private event.</CardTitle>
-              <p className="mt-4 text-sm text-muted-foreground">
-                Share your date, party size, and request. This form can be wired to your
-                preferred provider before launch.
+      <section id="contact" className="container pb-20">
+        <Card className="border-linen/20 bg-gunmetal/90 text-linen">
+          <div className="grid md:grid-cols-[1fr_1.1fr]">
+            <CardHeader className="border-b border-linen/15 md:border-b-0 md:border-r">
+              <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Reservations & Events</p>
+              <CardTitle className="font-display text-4xl">Tell us your night plan.</CardTitle>
+              <p className="text-linen/80">
+                Private events, birthdays, group reservations, and collaborations.
+                We will reply with options and timing.
               </p>
-              <div className="mt-6 rounded-xl border border-primary/30 bg-primary/10 p-3 text-sm text-primary">
-                <p className="flex items-center gap-2"><Ticket className="h-4 w-4" />Current promo: $2 off wine flights</p>
-              </div>
             </CardHeader>
             <CardContent className="p-6 md:p-8">
               <form action="/api/contact" method="post" className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <Input name="name" placeholder="Your name" required />
-                  <Input type="email" name="email" placeholder="Email" required />
+                  <Input name="name" placeholder="Your name" required className="h-12 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
+                  <Input type="email" name="email" placeholder="Email" required className="h-12 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
                 </div>
-                <Input name="date" placeholder="Preferred date / time" />
-                <Textarea name="message" placeholder="Tell us about your reservation or event" required />
-                <Button type="submit" size="lg" className="w-full sm:w-auto">Send Inquiry</Button>
+                <Input name="date" placeholder="Preferred date / time" className="h-12 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
+                <Textarea name="message" placeholder="Tell us what you're planning" required className="min-h-36 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
+                <Button type="submit" size="lg" className="rounded-full px-8">Send Inquiry</Button>
               </form>
             </CardContent>
           </div>

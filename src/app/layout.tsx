@@ -14,9 +14,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Atlas Bar | Portland Cocktails & Spirits",
+  title: "Atlas Landing | Midtown Reno Bar",
   description:
-    "Atlas Bar in Portland, OR. Seasonal cocktails, curated spirits, small bites, and late-night energy.",
+    "Atlas Landing in Midtown Reno, NV. Craft cocktails, wine flights, whiskey flights, and rotating beers.",
   icons: {
     icon: "/favicon.svg"
   }

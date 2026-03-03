@@ -51,6 +51,49 @@ section {
   scroll-margin-top: 90px;
 }
 
+.motion-up {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: motion-up 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.motion-scale {
+  opacity: 0;
+  transform: scale(0.96);
+  animation: motion-scale 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.motion-nav {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: motion-nav 500ms ease-out forwards;
+}
+
+.delay-1 {
+  animation-delay: 120ms;
+}
+
+.delay-2 {
+  animation-delay: 220ms;
+}
+
+.delay-3 {
+  animation-delay: 320ms;
+}
+
+.delay-4 {
+  animation-delay: 420ms;
+}
+
+.hover-lift {
+  transition: transform 280ms ease, box-shadow 280ms ease, border-color 280ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
 .glass {
   background: linear-gradient(
     180deg,
@@ -63,4 +106,42 @@ section {
 .reveal {
   opacity: 0;
   animation: fade-up 0.8s ease-out forwards;
+}
+
+@keyframes motion-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes motion-scale {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes motion-nav {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-up,
+  .motion-scale,
+  .motion-nav {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .hover-lift,
+  .hover-lift:hover {
+    transition: none;
+    transform: none;
+    box-shadow: none;
+  }
 }

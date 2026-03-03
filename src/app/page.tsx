@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <main className="relative overflow-hidden">
       <header className="fixed inset-x-0 top-0 z-50">
-        <nav className="container mt-4 flex items-center justify-between rounded-full border border-linen/20 bg-gunmetal/75 px-5 py-3 backdrop-blur-md">
+        <nav className="container mt-3 flex items-center justify-between rounded-full border border-linen/20 bg-gunmetal/75 px-4 py-2.5 backdrop-blur-md md:mt-4 md:px-5 md:py-3">
           <Link href="#home" className="flex items-center gap-3">
             <span className="rounded-full bg-linen/90 px-3 py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
               <Image src={assets.logo} alt="Atlas Landing" width={110} height={36} className="h-8 w-auto" priority />
@@ -63,8 +63,8 @@ export default function Home() {
             <Link href="#visit" className="text-linen/80 transition hover:text-linen">Visit</Link>
             <Link href="#contact" className="text-linen/80 transition hover:text-linen">Contact</Link>
           </div>
-          <Button asChild size="sm" className="rounded-full px-5">
-            <Link href="#contact">Reserve</Link>
+          <Button asChild size="sm" className="rounded-full px-4 md:px-5">
+            <Link href="#menu">Menu</Link>
           </Button>
         </nav>
       </header>
@@ -80,29 +80,29 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-gunmetal" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(183,109,104,0.25),transparent_45%)]" />
 
-        <div className="container relative z-10 flex min-h-screen items-end pb-16 pt-36 md:items-center md:pb-0">
+        <div className="container relative z-10 flex min-h-screen items-end pb-14 pt-28 md:items-center md:pb-0 md:pt-36">
           <div className="max-w-4xl">
             <Badge className="mb-6 rounded-full bg-secondary/90 px-4 py-1 text-secondary-foreground">
               Midtown Reno
             </Badge>
-            <h1 className="font-display text-5xl leading-[0.92] text-linen md:text-8xl">
+            <h1 className="font-display text-4xl leading-[0.95] text-linen sm:text-5xl md:text-8xl">
               Where late nights
               <br />
               pour better.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg text-linen/85">
+            <p className="mt-5 max-w-2xl text-base text-linen/85 md:mt-6 md:text-lg">
               Atlas Landing is a cocktail and wine bar built for long conversations,
               deep playlists, and one-more-round energy.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="rounded-full px-8">
+            <div className="mt-7 flex flex-wrap gap-3 md:mt-8">
+              <Button asChild size="lg" className="w-full rounded-full px-8 sm:w-auto">
                 <Link href="#menu">View Cocktails</Link>
               </Button>
               <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="rounded-full border-linen/40 bg-black/20 px-8 text-linen hover:bg-black/35"
+                className="w-full rounded-full border-linen/40 bg-black/20 px-8 text-linen hover:bg-black/35 sm:w-auto"
               >
                 <Link href="#visit">Get Directions</Link>
               </Button>
@@ -111,7 +111,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container -mt-12 relative z-20 pb-20">
+      <section className="container relative z-20 -mt-10 pb-16 md:-mt-12 md:pb-20">
         <div className="grid gap-4 md:grid-cols-3">
           <Card className="border-lobsterPink/40 bg-gunmetal/80">
             <CardContent className="p-6 text-linen">
@@ -134,12 +134,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="story" className="container pb-20">
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+      <section id="story" className="container pb-16 md:pb-20">
+        <div className="grid items-start gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <Card className="border-linen/20 bg-gunmetal/85 text-linen">
             <CardHeader>
               <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Atlas Landing</p>
-              <CardTitle className="font-display text-5xl">A Midtown bar with real personality.</CardTitle>
+              <CardTitle className="font-display text-3xl sm:text-4xl md:text-5xl">A Midtown bar with real personality.</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-linen/85">
               <p>
@@ -158,7 +158,7 @@ export default function Home() {
               alt="Inside Atlas Landing"
               width={1200}
               height={1500}
-              className="h-full w-full object-cover"
+              className="aspect-[4/5] w-full object-cover"
             />
           </div>
         </div>
@@ -176,13 +176,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="menu" className="container py-20">
+      <section id="menu" className="container py-16 md:py-20">
         <div className="mb-10 flex items-end justify-between gap-4">
           <div>
             <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Cocktail Menu</p>
-            <h2 className="font-display text-5xl text-linen">Now Pouring</h2>
+            <h2 className="font-display text-4xl text-linen md:text-5xl">Now Pouring</h2>
           </div>
-          <Badge variant="outline" className="border-linen/30 text-linen">Seasonal updates</Badge>
+          <Badge variant="outline" className="hidden border-linen/30 text-linen sm:inline-flex">Seasonal updates</Badge>
         </div>
 
         <Card className="border-linen/20 bg-gunmetal/80">
@@ -204,12 +204,19 @@ export default function Home() {
           <Card className="border-linen/20 bg-gunmetal/85 text-linen">
             <CardHeader>
               <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Visit Us</p>
-              <CardTitle className="font-display text-4xl">772 S Virginia St, Reno, NV 89509</CardTitle>
+              <CardTitle className="font-display text-3xl md:text-4xl">772 S Virginia St, Reno, NV 89509</CardTitle>
             </CardHeader>
             <CardContent className="space-y-5 text-sm text-linen/85">
               <p className="flex items-center gap-3"><Phone className="h-4 w-4 text-jungleTeal" />(775) 273-8146</p>
               <p className="flex items-center gap-3"><Mail className="h-4 w-4 text-jungleTeal" />info@atlaslanding.bar</p>
-              <p className="flex items-start gap-3"><Clock3 className="mt-0.5 h-4 w-4 text-jungleTeal" /><span>{hours.join(" | ")}</span></p>
+              <div className="flex items-start gap-3">
+                <Clock3 className="mt-0.5 h-4 w-4 text-jungleTeal" />
+                <ul className="space-y-1">
+                  {hours.map((time) => (
+                    <li key={time}>{time}</li>
+                  ))}
+                </ul>
+              </div>
               <Separator className="bg-linen/20" />
               <div className="grid gap-3">
                 <Link href="http://maps.apple.com/?daddr=772+S+Virginia+St,+Reno+NV" target="_blank" className="inline-flex items-center gap-2 text-sandDune hover:text-linen"><MapPin className="h-4 w-4" />Open in Maps</Link>
@@ -235,10 +242,10 @@ export default function Home() {
         <Card className="border-linen/20 bg-gunmetal/90 text-linen">
           <div className="grid md:grid-cols-[1fr_1.1fr]">
             <CardHeader className="border-b border-linen/15 md:border-b-0 md:border-r">
-              <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Reservations & Events</p>
-              <CardTitle className="font-display text-4xl">Tell us your night plan.</CardTitle>
+              <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Events & Inquiries</p>
+              <CardTitle className="font-display text-3xl md:text-4xl">Tell us your night plan.</CardTitle>
               <p className="text-linen/80">
-                Private events, birthdays, group reservations, and collaborations.
+                Private events, birthdays, large groups, and collaborations.
                 We will reply with options and timing.
               </p>
             </CardHeader>
@@ -248,7 +255,7 @@ export default function Home() {
                   <Input name="name" placeholder="Your name" required className="h-12 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
                   <Input type="email" name="email" placeholder="Email" required className="h-12 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
                 </div>
-                <Input name="date" placeholder="Preferred date / time" className="h-12 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
+                <Input name="date" placeholder="Event date / timing (optional)" className="h-12 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
                 <Textarea name="message" placeholder="Tell us what you're planning" required className="min-h-36 rounded-xl border-linen/25 bg-linen/10 text-linen placeholder:text-linen/60" />
                 <Button type="submit" size="lg" className="rounded-full px-8">Send Inquiry</Button>
               </form>

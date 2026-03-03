@@ -21,7 +21,7 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 
 const assets = {
-  logo: "https://cdn.prod.website-files.com/643b06564581272492d75842/66e22665893360296137d79f_atlasdark.png",
+  logo: "https://cdn.prod.website-files.com/643b06564581272492d75842/64ee88e0afb4f279136f0253_green%20logo.svg",
   hero: "https://cdn.prod.website-files.com/643b06564581272492d75842/64aeefdd6b8c0c941a3baee4_IMG_1924-min.JPG",
   gallery: "https://cdn.prod.website-files.com/643b06564581272492d75842/66e384bba07e40107a7b066f_IMG_2684%203-2.jpg"
 };
@@ -53,7 +53,9 @@ export default function Home() {
       <header className="fixed inset-x-0 top-0 z-50">
         <nav className="container mt-4 flex items-center justify-between rounded-full border border-linen/20 bg-gunmetal/75 px-5 py-3 backdrop-blur-md">
           <Link href="#home" className="flex items-center gap-3">
-            <Image src={assets.logo} alt="Atlas Landing" width={110} height={36} className="h-8 w-auto" priority />
+            <span className="rounded-full bg-linen/90 px-3 py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
+              <Image src={assets.logo} alt="Atlas Landing" width={110} height={36} className="h-8 w-auto" priority />
+            </span>
           </Link>
           <div className="hidden items-center gap-7 text-sm md:flex">
             <Link href="#story" className="text-linen/80 transition hover:text-linen">Story</Link>

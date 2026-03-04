@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+const FALLBACK_RESEND_API_KEY = "re_Ra3sQ15f_FWLYqbJTzgpnTqVK5qZ2YYBb";
+const DEFAULT_CONTACT_TO_EMAIL = "info@atlaslanding.bar";
+
 function required(value: FormDataEntryValue | null) {
   return typeof value === "string" ? value.trim() : "";
 }
@@ -27,19 +30,12 @@ export async function POST(req: Request) {
       );
     }
 
-    const to = process.env.CONTACT_TO_EMAIL ?? "info@atlaslanding.bar";
+    const resendApiKey = process.env.RESEND_API_KEY ?? FALLBACK_RESEND_API_KEY;
+    const to = process.env.CONTACT_TO_EMAIL ?? DEFAULT_CONTACT_TO_EMAIL;
     const from =
       process.env.CONTACT_FROM_EMAIL ?? "Atlas Landing <onboarding@resend.dev>";
 
-    if (!process.env.RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not set.");
-      return NextResponse.json(
-        { ok: false, error: "Email service is not configured." },
-        { status: 500 }
-      );
-    }
-
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(resendApiKey);
 
     await resend.emails.send({
       from,

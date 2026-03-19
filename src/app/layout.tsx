@@ -73,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${manrope.variable} ${playfair.variable} antialiased`}>
         <Script id="loader-init" strategy="beforeInteractive">{`
           (function () {
@@ -114,10 +114,6 @@ export default function RootLayout({
             function closeLoader() {
               html.classList.remove("loader-active");
               html.setAttribute("data-show-loader", "false");
-              var root = document.getElementById("daily-loader");
-              if (root) {
-                root.style.display = "none";
-              }
             }
 
             function bootLoader() {
@@ -133,7 +129,6 @@ export default function RootLayout({
                 return;
               }
 
-              root.style.display = "flex";
               var didFinish = false;
               var stopFallback = window.setTimeout(function () {
                 if (!didFinish) {
@@ -181,8 +176,8 @@ export default function RootLayout({
             }
           })();
         `}</Script>
-        <div id="daily-loader" aria-hidden="true">
-          <div id="daily-loader-animation" />
+        <div id="daily-loader" aria-hidden="true" suppressHydrationWarning>
+          <div id="daily-loader-animation" suppressHydrationWarning />
         </div>
         <div data-app-root>{children}</div>
       </body>

@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 
-import { DailyLoader } from "@/components/daily-loader";
-
 import "./globals.css";
 
 const manrope = Manrope({
@@ -79,23 +77,113 @@ export default function RootLayout({
       <body className={`${manrope.variable} ${playfair.variable} antialiased`}>
         <Script id="loader-init" strategy="beforeInteractive">{`
           (function () {
+            var html = document.documentElement;
+            var key = "atlas-loader-last-shown";
+            function localDateKey() {
+              var now = new Date();
+              var year = now.getFullYear();
+              var month = String(now.getMonth() + 1).padStart(2, "0");
+              var day = String(now.getDate()).padStart(2, "0");
+              return year + "-" + month + "-" + day;
+            }
             try {
-              var key = "atlas-loader-last-shown";
-              var today = new Date().toISOString().slice(0, 10);
+              var today = localDateKey();
               var shouldShow = window.localStorage.getItem(key) !== today;
-              document.documentElement.setAttribute("data-show-loader", shouldShow ? "true" : "false");
+              html.setAttribute("data-show-loader", shouldShow ? "true" : "false");
               if (shouldShow) {
-                document.documentElement.classList.add("loader-active");
+                html.classList.add("loader-active");
+                window.localStorage.setItem(key, today);
               } else {
-                document.documentElement.classList.remove("loader-active");
+                html.classList.remove("loader-active");
               }
             } catch (e) {
-              document.documentElement.setAttribute("data-show-loader", "true");
-              document.documentElement.classList.add("loader-active");
+              html.setAttribute("data-show-loader", "true");
+              html.classList.add("loader-active");
             }
           })();
         `}</Script>
-        <DailyLoader />
+        <Script
+          src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"
+          strategy="beforeInteractive"
+        />
+        <Script id="loader-play" strategy="beforeInteractive">{`
+          (function () {
+            var html = document.documentElement;
+            var maxLoaderMs = 10000;
+
+            function closeLoader() {
+              html.classList.remove("loader-active");
+              html.setAttribute("data-show-loader", "false");
+              var root = document.getElementById("daily-loader");
+              if (root) {
+                root.style.display = "none";
+              }
+            }
+
+            function bootLoader() {
+              if (html.getAttribute("data-show-loader") !== "true") {
+                closeLoader();
+                return;
+              }
+
+              var root = document.getElementById("daily-loader");
+              var mount = document.getElementById("daily-loader-animation");
+              if (!root || !mount) {
+                closeLoader();
+                return;
+              }
+
+              root.style.display = "flex";
+              var didFinish = false;
+              var stopFallback = window.setTimeout(function () {
+                if (!didFinish) {
+                  didFinish = true;
+                  closeLoader();
+                }
+              }, maxLoaderMs);
+
+              function done() {
+                if (didFinish) {
+                  return;
+                }
+                didFinish = true;
+                window.clearTimeout(stopFallback);
+                closeLoader();
+              }
+
+              function start() {
+                if (!window.lottie) {
+                  window.setTimeout(start, 30);
+                  return;
+                }
+                try {
+                  var animation = window.lottie.loadAnimation({
+                    container: mount,
+                    renderer: "svg",
+                    loop: false,
+                    autoplay: true,
+                    path: "/atlas-loader-animation.json"
+                  });
+                  animation.addEventListener("complete", done);
+                  animation.addEventListener("data_failed", done);
+                } catch (e) {
+                  done();
+                }
+              }
+
+              start();
+            }
+
+            if (document.readyState === "loading") {
+              document.addEventListener("DOMContentLoaded", bootLoader, { once: true });
+            } else {
+              bootLoader();
+            }
+          })();
+        `}</Script>
+        <div id="daily-loader" aria-hidden="true">
+          <div id="daily-loader-animation" />
+        </div>
         <div data-app-root>{children}</div>
       </body>
     </html>

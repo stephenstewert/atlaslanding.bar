@@ -59,6 +59,25 @@ html.loader-active [data-app-root] {
   visibility: hidden;
 }
 
+#daily-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #242424;
+}
+
+#daily-loader-animation {
+  width: 100vw;
+  height: 100vh;
+}
+
+html.loader-active #daily-loader {
+  display: flex;
+}
+
 section {
   scroll-margin-top: 90px;
 }

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
+import Script from "next/script";
 
 import { DailyLoader } from "@/components/daily-loader";
 
@@ -76,8 +77,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${playfair.variable} antialiased`}>
+        <Script id="loader-init" strategy="beforeInteractive">{`
+          (function () {
+            try {
+              var key = "atlas-loader-last-shown";
+              var today = new Date().toISOString().slice(0, 10);
+              var shouldShow = window.localStorage.getItem(key) !== today;
+              document.documentElement.setAttribute("data-show-loader", shouldShow ? "true" : "false");
+              if (shouldShow) {
+                document.documentElement.classList.add("loader-active");
+              } else {
+                document.documentElement.classList.remove("loader-active");
+              }
+            } catch (e) {
+              document.documentElement.setAttribute("data-show-loader", "true");
+              document.documentElement.classList.add("loader-active");
+            }
+          })();
+        `}</Script>
         <DailyLoader />
-        {children}
+        <div data-app-root>{children}</div>
       </body>
     </html>
   );

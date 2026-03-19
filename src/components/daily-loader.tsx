@@ -3,60 +3,93 @@
 import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 
-const LOADER_ANIMATION_URL =
-  "https://cdn.prod.website-files.com/643b06564581272492d75842/64f043d68af9f6e69ce4527c_Atlas%20Animation-2.json";
 const LOADER_STORAGE_KEY = "atlas-loader-last-shown";
-
-type AnimationData = Record<string, unknown>;
+const LOADER_HTML_CLASS = "loader-active";
+const LOADER_FLAG_ATTR = "data-show-loader";
 
 function todayKey() {
   return new Date().toISOString().slice(0, 10);
 }
 
 export function DailyLoader() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [animationData, setAnimationData] = useState<AnimationData | null>(null);
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof document === "undefined") {
+      return false;
+    }
+
+    return document.documentElement.getAttribute(LOADER_FLAG_ATTR) === "true";
+  });
+  const [animationData, setAnimationData] = useState<object | null>(null);
 
   useEffect(() => {
-    const lastShown = window.localStorage.getItem(LOADER_STORAGE_KEY);
+    const html = document.documentElement;
+    const shouldShowFromFlag = html.getAttribute(LOADER_FLAG_ATTR) === "true";
     const today = todayKey();
+    const shouldShow =
+      shouldShowFromFlag ||
+      window.localStorage.getItem(LOADER_STORAGE_KEY) !== today;
 
-    if (lastShown === today) {
+    if (!shouldShow) {
+      html.classList.remove(LOADER_HTML_CLASS);
+      html.setAttribute(LOADER_FLAG_ATTR, "false");
+      setIsVisible(false);
       return;
     }
 
-    window.localStorage.setItem(LOADER_STORAGE_KEY, today);
+    html.classList.add(LOADER_HTML_CLASS);
+    html.setAttribute(LOADER_FLAG_ATTR, "true");
     setIsVisible(true);
+    window.localStorage.setItem(LOADER_STORAGE_KEY, today);
 
-    void fetch(LOADER_ANIMATION_URL)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to load animation JSON");
+    let cancelled = false;
+    void import("@/data/atlas-loader-animation.json")
+      .then((module) => {
+        if (cancelled) {
+          return;
         }
-
-        return response.json() as Promise<AnimationData>;
+        setAnimationData(module.default as object);
       })
-      .then(setAnimationData)
       .catch(() => {
+        if (cancelled) {
+          return;
+        }
         setIsVisible(false);
+        html.classList.remove(LOADER_HTML_CLASS);
+        html.setAttribute(LOADER_FLAG_ATTR, "false");
       });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  if (!isVisible || !animationData) {
+  const closeLoader = () => {
+    const html = document.documentElement;
+    html.classList.remove(LOADER_HTML_CLASS);
+    html.setAttribute(LOADER_FLAG_ATTR, "false");
+    setIsVisible(false);
+  };
+
+  if (!isVisible) {
     return null;
   }
 
   return (
-    <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-[#242424]">
-      <div className="h-screen w-screen">
-        <Lottie
-          animationData={animationData}
-          autoplay
-          loop={false}
-          style={{ width: "100%", height: "100%" }}
-          onComplete={() => setIsVisible(false)}
-        />
-      </div>
+    <div
+      data-loader-root
+      className="fixed inset-0 z-[1000] flex items-center justify-center bg-[#242424]"
+    >
+      {animationData ? (
+        <div className="h-screen w-screen">
+          <Lottie
+            animationData={animationData}
+            autoplay
+            loop={false}
+            style={{ width: "100%", height: "100%" }}
+            onComplete={closeLoader}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }

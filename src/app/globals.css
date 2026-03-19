@@ -51,6 +51,14 @@ body {
     linear-gradient(140deg, #242424 0%, #3d3d3d 45%, #2f2f2f 100%);
 }
 
+html.loader-active body {
+  overflow: hidden;
+}
+
+html.loader-active [data-app-root] {
+  visibility: hidden;
+}
+
 section {
   scroll-margin-top: 90px;
 }

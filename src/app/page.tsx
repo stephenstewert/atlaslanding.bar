@@ -8,6 +8,7 @@ import {
   MapPin,
   Music4,
   Phone,
+  Popcorn,
   Sparkles,
   Users,
   Wine
@@ -26,73 +27,248 @@ const assets = {
   gallery: "https://cdn.prod.website-files.com/643b06564581272492d75842/66e384bba07e40107a7b066f_IMG_2684%203-2.jpg"
 };
 
-const cocktails = [
-  ["Midnight 75", "$13"],
-  ["Passion Spark", "$13"],
-  ["Heatwave", "$13"],
-  ["Arancia Rossa", "$13"],
-  ["Golden Hour", "$14"],
-  ["Last Leaf", "$13"],
-  ["Harvest Honey", "$13"],
-  ["Altura", "$14"]
+const signatureCocktails = [
+  {
+    name: "Midnight 75",
+    price: "$14",
+    description: "Gray Whale Gin, Lemon, Simple, Blackberry Puree, Bubbles"
+  },
+  {
+    name: "Passion Spark",
+    price: "$14",
+    description: "Fris Vodka, Passoa, Lime, Agave, Sparkling Water"
+  },
+  {
+    name: "Heatwave",
+    price: "$13",
+    description: "Corazon Tequila, Jalapeno, Agave, Lime, Ginger Beer"
+  },
+  {
+    name: "Blood Orange Spritz",
+    price: "$14",
+    description: "Aperol, SP Blood Orange, Wycliffe Brut, Sparkling Water"
+  }
+];
+
+const seasonalCocktails = [
+  {
+    name: "Garden Society",
+    price: "$15",
+    description: "Ketel Cucumber Mint, Lemon, Raspberry, Black Tea, Sparkling"
+  },
+  {
+    name: "In Bloom",
+    price: "$15",
+    description: "Fris Vodka, Grind Coffee Liquor, Bailey's, Lavender, Espresso"
+  },
+  {
+    name: "Wildflower Sour",
+    price: "$15",
+    description: "Jameson, Elderflower, Honey, Lemon, Pomegranate Foam"
+  },
+  {
+    name: "Honeyglass",
+    price: "$14",
+    description: "Corazon Tequila, Aperol, Lemon, Honey, Orange Bitters"
+  }
+];
+
+const wineByTheGlass = [
+  ["Benvolio Prosecco", "$13"],
+  ["La Marca Prosecco", "$13"],
+  ["Los Morros Sauv Blanc", "$13"],
+  ["Los Morros Cabernet", "$13"],
+  ["Valderba Garnacha", "$13"],
+  ["Kransno Merlot", "$13"],
+  ["Conundrum Red Blend", "$13"],
+  ["Avaline Cabernet", "$14"],
+  ["La Crema Pinot Noir", "$13"],
+  ["Lucien Albrecht Brut Rose", "$14"]
 ];
 
 const draftBeer = [
-  ["Boneyard RPM IPA", "$7"],
-  ["Coronado Weekend Vibes IPA", "$7"],
-  ["Deschutes King Crispy Pilsner", "$6"],
-  ["Hazy Lil Thing IPA", "$7"],
-  ["Revision Double IPA", "$7"],
-  ["805 Cerveza", "$6"],
-  ["805 Blonde", "$6"],
-  ["Pigeon Head Pilsner", "$6"],
-  ["Sierra Nevada Oktoberfest Amber", "$6"],
-  ["Cali Squeeze Blood Orange", "$6"],
-  ["Stiegl Grapefruit Radler", "$6"],
-  ["Ace Pink Guava Cider", "$6"]
+  ["Boneyard DTH IPA", "$8"],
+  ["Sierra Nevada Pilsner", "$7"],
+  ["Modelo", "$7"],
+  ["Sapporo", "$8"],
+  ["805 Blonde", "$8"],
+  ["805 Cerveza", "$8"],
+  ["Deschutes Porter", "$8"],
+  ["Boneyard Red Ale", "$8"],
+  ["Guinness", "$8"]
 ];
 
 const spirits = [
   {
     category: "Gin",
-    items: ["Nolet's $12", "Hendrick's Neptunia $12", "Hendrick's $11", "Gray Whale $9", "Theory 002 $9", "Russell Henry $9", "Empress $9", "Malfy Italian Lemon $8", "Aviation $8", "Few $8", "Tanqueray $8", "Bombay Sapphire $8"]
+    items: [
+      "Nolet's $12",
+      "Hendrick's Neptunia $12",
+      "Hendrick's $11",
+      "Gray Whale $9",
+      "Theory 002 $9",
+      "Russell Henry $9",
+      "Empress $9",
+      "Malfy Italian Lemon $8",
+      "Aviation $8",
+      "Few $8",
+      "Tanqueray $8",
+      "Bombay Sapphire $8"
+    ]
   },
   {
     category: "Vodka",
-    items: ["Elit Eighteen $11", "Ketel One Grapefruit and Rose $9", "Ketel One Cucumber and Mint $9", "Absolut Elyx $9", "Grey Goose $9", "Ketel One $8", "Source One Oak Sherry Casks $8", "Hera the Dog $8", "Tahoe Blue $8", "Tito's $8"]
+    items: [
+      "Elit Eighteen $11",
+      "Ketel One Grapefruit and Rose $9",
+      "Ketel One Cucumber and Mint $9",
+      "Absolut Elyx $9",
+      "Grey Goose $9",
+      "Ketel One $8",
+      "Source One Oak Sherry Casks $8",
+      "Hera the Dog $8",
+      "Tahoe Blue $8",
+      "Tito's $8"
+    ]
   },
   {
     category: "Tequila",
-    items: ["Casa Dragones Anejo $15", "Casa Dragones Blanco $13", "El Sativo Anejo $13", "El Sativo Reposado $12", "Casamigos Reposado $13", "Casamigos Blanco $11", "Fortaleza Blanco $11", "El Sativo Blanco $10", "Herradura Reposado $10", "Puntagave Blanco $10", "Casa Noble Blanco $9", "Cazadores Reposado $8"]
+    items: [
+      "Casa Dragones Anejo $15",
+      "Casa Dragones Blanco $13",
+      "El Sativo Anejo $13",
+      "El Sativo Reposado $12",
+      "Casamigos Reposado $13",
+      "Casamigos Blanco $11",
+      "Fortaleza Blanco $11",
+      "El Sativo Blanco $10",
+      "Herradura Reposado $10",
+      "Puntagave Blanco $10",
+      "Casa Noble Blanco $9",
+      "Cazadores Reposado $8"
+    ]
   },
   {
     category: "Rum",
-    items: ["Four Square Empery Single Blended Rum $20", "Four Square 2007 Single Blended Rum $15", "Opthimus 21 Year Rum $15", "Don Q Double Aged Puerto Rican Rum $14", "Centenario 20 Year $12", "Four Square Zinfandel Cask Blend $11", "Plantation Pineapple Rum $8", "Clement Single Barrel Caribbean Rum $8", "Don Q Oak Barrel Spiced $8", "Smith and Cross Jamaica Rum $7"]
+    items: [
+      "Four Square Empery Single Blended Rum $20",
+      "Four Square 2007 Single Blended Rum $15",
+      "Opthimus 21 Year Rum $15",
+      "Don Q Double Aged Puerto Rican Rum $14",
+      "Centenario 20 Year $12",
+      "Four Square Zinfandel Cask Blend $11",
+      "Plantation Pineapple Rum $8",
+      "Clement Single Barrel Caribbean Rum $8",
+      "Don Q Oak Barrel Spiced $8",
+      "Smith and Cross Jamaica Rum $7"
+    ]
   },
   {
     category: "Irish Whiskey",
-    items: ["Redbreast 12 Year $15", "Green Spot $15", "Writer's Tears $12", "Knappogue 12 Year $10", "Jameson $8"]
+    items: [
+      "Redbreast 12 Year $15",
+      "Green Spot $15",
+      "Writer's Tears $12",
+      "Knappogue 12 Year $10",
+      "Jameson $8"
+    ]
   },
   {
     category: "Japanese Whiskey",
-    items: ["Suntory Hakushu 12 Year $35", "Nikka Single Malt Yoichi $30", "Yamazaki 12 Year $25", "Nikka From the Barrel $11", "Iwai Mars Whisky $10", "Nikka Coffey Grain Whisky $9", "Suntory Toki $8"]
+    items: [
+      "Suntory Hakushu 12 Year $35",
+      "Nikka Single Malt Yoichi $30",
+      "Yamazaki 12 Year $25",
+      "Nikka From the Barrel $11",
+      "Iwai Mars Whisky $10",
+      "Nikka Coffey Grain Whisky $9",
+      "Suntory Toki $8"
+    ]
   },
   {
     category: "Bourbon",
-    items: ["Michter's Single Barrel 10 $55", "Elijah Craig $35", "Clyde May's 10 Year $25", "Wild Turkey Decades $25", "Blood Oath Pact No.6 $22", "Blood Oath Pact No.4 $20", "Little Book Chapter 03: The Road Home $20", "Blanton's $18", "Eagle Rare $18", "Little Book Chapter 02: No Simple Task $17", "Weller Special Reserve $15", "Rebel Yell Single Barrel 10 Year $14", "Wild Turkey Kentucky Spirit Single Barrel $14", "Four Roses Single Barrel $12", "Basil Hayden Toast $12", "Clyde May's $12", "Wild Turkey Rare Breed $12", "Bulleit 10 Year $11", "Larceny $11", "The Wiseman $11", "Broken Barrel Cask Strength $11", "Uncle Nearest 1884 $10", "Baker's 7 Year $9", "Frey Ranch $9", "Woodford Reserve $9", "Broken Barrel California Oak $9", "Whistle Pig Piggyback $9", "Basil Hayden $9", "Howler Head Banana Whiskey $9", "Four Roses Small Batch Select $9", "Maker's Mark $8", "Pendleton $8"]
+    items: [
+      "Michter's Single Barrel 10 $55",
+      "Elijah Craig $35",
+      "Clyde May's 10 Year $25",
+      "Wild Turkey Decades $25",
+      "Blood Oath Pact No.6 $22",
+      "Blood Oath Pact No.4 $20",
+      "Little Book Chapter 03: The Road Home $20",
+      "Blanton's $18",
+      "Eagle Rare $18",
+      "Little Book Chapter 02: No Simple Task $17",
+      "Weller Special Reserve $15",
+      "Rebel Yell Single Barrel 10 Year $14",
+      "Wild Turkey Kentucky Spirit Single Barrel $14",
+      "Four Roses Single Barrel $12",
+      "Basil Hayden Toast $12",
+      "Clyde May's $12",
+      "Wild Turkey Rare Breed $12",
+      "Bulleit 10 Year $11",
+      "Larceny $11",
+      "The Wiseman $11",
+      "Broken Barrel Cask Strength $11",
+      "Uncle Nearest 1884 $10",
+      "Baker's 7 Year $9",
+      "Frey Ranch $9",
+      "Woodford Reserve $9",
+      "Broken Barrel California Oak $9",
+      "Whistle Pig Piggyback $9",
+      "Basil Hayden $9",
+      "Howler Head Banana Whiskey $9",
+      "Four Roses Small Batch Select $9",
+      "Maker's Mark $8",
+      "Pendleton $8"
+    ]
   },
   {
     category: "Rye",
-    items: ["Peerless Rye $25", "Whistle Pig Roadstock $20", "Barrel Rye $15", "Angel's Envy $15", "Basil Hayden Dark Rye $12", "Frey Ranch $12", "Sazerac $9", "Bulleit $8"]
+    items: [
+      "Peerless Rye $25",
+      "Whistle Pig Roadstock $20",
+      "Barrel Rye $15",
+      "Angel's Envy $15",
+      "Basil Hayden Dark Rye $12",
+      "Frey Ranch $12",
+      "Sazerac $9",
+      "Bulleit $8"
+    ]
   },
   {
     category: "Scotch",
-    items: ["Glenlivet Nadurra 16 Year $35", "Jura Single Malt 18 Year $22", "Baller Single Malt $20", "Aultmore Speyside Single Malt 12 Year $20", "Bunnahabhain Islay Single Malt 18 Year $20", "Springbank 15 Year $20", "Lagavulin 8 Year $15", "Drambuie 15 Year $14", "Highland Park Valkyrie $12", "Auchentoshan The Bartenders Malt $12", "Johnnie Walker Green Label 15 Year Blended Malt $10", "Glenfiddich Single Malt 12 Year $9", "The Glenrothes Select Reserve Speyside Single Malt $7"]
+    items: [
+      "Glenlivet Nadurra 16 Year $35",
+      "Jura Single Malt 18 Year $22",
+      "Baller Single Malt $20",
+      "Aultmore Speyside Single Malt 12 Year $20",
+      "Bunnahabhain Islay Single Malt 18 Year $20",
+      "Springbank 15 Year $20",
+      "Lagavulin 8 Year $15",
+      "Drambuie 15 Year $14",
+      "Highland Park Valkyrie $12",
+      "Auchentoshan The Bartenders Malt $12",
+      "Johnnie Walker Green Label 15 Year Blended Malt $10",
+      "Glenfiddich Single Malt 12 Year $9",
+      "The Glenrothes Select Reserve Speyside Single Malt $7"
+    ]
   },
   {
     category: "Misc.",
-    items: ["Crown Royal Noble Collection $11", "Screwball Peanut Butter Whiskey $9", "Ballotin Caramel Turtle Whisky $9", "Jack Daniel's Sour Mash $7", "Jameson $8"]
+    items: [
+      "Crown Royal Noble Collection $11",
+      "Screwball Peanut Butter Whiskey $9",
+      "Ballotin Caramel Turtle Whisky $9",
+      "Jack Daniel's Sour Mash $7",
+      "Jameson $8"
+    ]
   }
+];
+
+const snacks = [
+  ["Peanuts", ""],
+  ["Pub Mix", ""],
+  ["OBOUR Hummus & Pita Chips", "$12"]
 ];
 
 const hours = [
@@ -116,22 +292,7 @@ function splitPrice(line: string) {
   return { name, price };
 }
 
-function splitIntoBalancedColumns<T extends { items: string[] }>(groups: T[]) {
-  const columns: [T[], T[]] = [[], []];
-  const totals = [0, 0];
-
-  for (const group of groups) {
-    const targetColumn = totals[0] <= totals[1] ? 0 : 1;
-    columns[targetColumn].push(group);
-    totals[targetColumn] += group.items.length;
-  }
-
-  return columns;
-}
-
 export default function Home() {
-  const spiritColumns = splitIntoBalancedColumns(spirits);
-
   return (
     <main className="relative overflow-hidden">
       <SiteHeader logoSrc={assets.logo} />
@@ -158,12 +319,12 @@ export default function Home() {
               pour better.
             </h1>
             <p className="motion-up delay-2 mt-5 max-w-2xl text-base text-linen/85 md:mt-6 md:text-lg">
-              Atlas Landing is a cocktail and wine bar built for long conversations,
-              deep playlists, and one-more-round energy.
+              Atlas Landing is a cocktail bar built for long conversations,
+              deep playlists, and a menu that moves from spritzes to wine to late-night snacks.
             </p>
             <div className="motion-up delay-3 mt-7 flex flex-wrap gap-3 md:mt-8">
               <Button asChild size="lg" className="w-full rounded-full px-8 sm:w-auto">
-                <Link href="#menu">View Cocktails</Link>
+                <Link href="#menu">View Menu</Link>
               </Button>
               <Button
                 asChild
@@ -182,19 +343,28 @@ export default function Home() {
         <div className="grid gap-4 md:grid-cols-3">
           <Card className="motion-up hover-lift border-lobsterPink/40 bg-gunmetal/80">
             <CardContent className="p-6 text-linen">
-              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune"><Sparkles className="h-4 w-4" /> Signature Program</p>
-              <p className="text-2xl font-display">Seasonal cocktails + classic flights</p>
+              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune">
+                <Sparkles className="h-4 w-4" />
+                Signature Program
+              </p>
+              <p className="text-2xl font-display">House signatures with bright seasonal swings</p>
             </CardContent>
           </Card>
           <Card className="motion-up delay-1 hover-lift border-jungleTeal/40 bg-gunmetal/80">
             <CardContent className="p-6 text-linen">
-              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune"><Music4 className="h-4 w-4" /> Atmosphere</p>
+              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune">
+                <Music4 className="h-4 w-4" />
+                Atmosphere
+              </p>
               <p className="text-2xl font-display">Moody lighting, vinyl energy, intimate tables</p>
             </CardContent>
           </Card>
           <Card className="motion-up delay-2 hover-lift border-lobsterPink/40 bg-gunmetal/80">
             <CardContent className="p-6 text-linen">
-              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune"><Users className="h-4 w-4" /> Community</p>
+              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune">
+                <Users className="h-4 w-4" />
+                Community
+              </p>
               <p className="text-2xl font-display">Neighborhood regulars and first dates alike</p>
             </CardContent>
           </Card>
@@ -206,12 +376,15 @@ export default function Home() {
           <Card className="motion-up hover-lift border-linen/20 bg-gunmetal/85 text-linen">
             <CardHeader>
               <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Atlas Landing</p>
-              <CardTitle className="font-display text-3xl sm:text-4xl md:text-5xl">A Midtown bar with real personality.</CardTitle>
+              <CardTitle className="font-display text-3xl sm:text-4xl md:text-5xl">
+                A Midtown bar with real personality.
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-linen/85">
               <p>
-                We focus on cocktails, beer, wine, and whiskey flights without feeling formal.
-                The room is warm, the menu rotates, and the soundtrack keeps the pace all night.
+                We focus on cocktails, beer, wine, and easy late-night snacks without making the
+                room feel formal. The soundtrack stays on point and the menu keeps things bright,
+                crisp, and social.
               </p>
               <p>
                 From opening pours to last call, Atlas is built for people who want a better
@@ -233,11 +406,13 @@ export default function Home() {
 
       <section className="motion-up border-y border-linen/15 bg-lobsterPink/20 py-4">
         <div className="container flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm uppercase tracking-[0.2em] text-sandDune">
-          <span>Happy Hour 3-5PM Mon-Thu</span>
+          <span>Beer</span>
           <span>•</span>
-          <span>$2 Off Draft Beer</span>
+          <span>Craft Cocktails</span>
           <span>•</span>
-          <span>$8 Well Cocktails</span>
+          <span>Wine</span>
+          <span>•</span>
+          <span>Snacks</span>
           <span>•</span>
           <span>Midtown Reno</span>
         </div>
@@ -246,42 +421,130 @@ export default function Home() {
       <section id="menu" className="container py-14 md:py-16">
         <div className="mb-10 flex items-end justify-between gap-4">
           <div>
-            <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Cocktail Menu</p>
+            <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Current Menu</p>
             <h2 className="font-display text-4xl text-linen md:text-5xl">Now Pouring</h2>
           </div>
-          <Badge variant="outline" className="hidden border-linen/30 text-linen sm:inline-flex">Seasonal updates</Badge>
+          <Badge variant="outline" className="hidden border-linen/30 text-linen sm:inline-flex">
+            Updated from house PDF
+          </Badge>
         </div>
 
-        <Card className="motion-up border-linen/20 bg-gunmetal/80">
-          <CardContent className="grid gap-x-10 gap-y-4 p-8 md:grid-cols-2">
-            {cocktails.map(([name, price], idx) => (
-              <div key={name} className="motion-up flex items-end justify-between border-b border-linen/15 pb-3" style={{ animationDelay: `${idx * 60}ms` }}>
-                <div>
-                  <p className="font-display text-2xl text-linen">{name}</p>
-                </div>
-                <p className="text-lg text-lobsterPink">{price}</p>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </section>
+        <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+          <div className="grid gap-6">
+            <Card className="motion-up border-linen/20 bg-gunmetal/80">
+              <CardHeader className="pb-2">
+                <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Cocktails</p>
+                <CardTitle className="font-display text-3xl text-linen md:text-4xl">
+                  Signatures
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="grid gap-4 p-6 pt-2 md:grid-cols-2 md:p-8 md:pt-2">
+                {signatureCocktails.map((item, idx) => (
+                  <div
+                    key={item.name}
+                    className="motion-up border-b border-linen/15 pb-4"
+                    style={{ animationDelay: `${idx * 60}ms` }}
+                  >
+                    <div className="mb-2 flex items-end justify-between gap-4">
+                      <p className="font-display text-2xl text-linen">{item.name}</p>
+                      <p className="text-lg text-lobsterPink">{item.price}</p>
+                    </div>
+                    <p className="text-sm leading-6 text-linen/75">{item.description}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
 
-      <section id="beer" className="container pb-16 md:pb-20">
-        <div className="mb-8">
-          <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Draft Beer</p>
-          <h2 className="font-display text-4xl text-linen md:text-5xl">On Tap</h2>
+            <Card className="motion-up delay-1 border-linen/20 bg-gunmetal/80">
+              <CardHeader className="pb-2">
+                <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Cocktails</p>
+                <CardTitle className="font-display text-3xl text-linen md:text-4xl">
+                  Seasonal Creations
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="grid gap-4 p-6 pt-2 md:grid-cols-2 md:p-8 md:pt-2">
+                {seasonalCocktails.map((item, idx) => (
+                  <div
+                    key={item.name}
+                    className="motion-up border-b border-linen/15 pb-4"
+                    style={{ animationDelay: `${idx * 60}ms` }}
+                  >
+                    <div className="mb-2 flex items-end justify-between gap-4">
+                      <p className="font-display text-2xl text-linen">{item.name}</p>
+                      <p className="text-lg text-jungleTeal">{item.price}</p>
+                    </div>
+                    <p className="text-sm leading-6 text-linen/75">{item.description}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="grid gap-6">
+            <Card className="motion-up delay-2 border-linen/20 bg-gunmetal/80">
+              <CardHeader className="pb-3">
+                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
+                  <Wine className="h-4 w-4" />
+                  Wines By The Glass
+                </p>
+              </CardHeader>
+              <CardContent className="space-y-3 p-6 pt-0">
+                {wineByTheGlass.map(([name, price], idx) => (
+                  <div
+                    key={name}
+                    className="motion-up flex items-end justify-between gap-4 border-b border-linen/15 pb-3"
+                    style={{ animationDelay: `${idx * 40}ms` }}
+                  >
+                    <p className="text-base text-linen">{name}</p>
+                    <p className="text-base text-lobsterPink">{price}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card className="motion-up delay-3 border-linen/20 bg-gunmetal/80">
+              <CardHeader className="pb-3">
+                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
+                  <Sparkles className="h-4 w-4" />
+                  Draft Beer
+                </p>
+              </CardHeader>
+              <CardContent className="space-y-3 p-6 pt-0">
+                {draftBeer.map(([name, price], idx) => (
+                  <div
+                    key={name}
+                    className="motion-up flex items-end justify-between gap-4 border-b border-linen/15 pb-3"
+                    style={{ animationDelay: `${idx * 40}ms` }}
+                  >
+                    <p className="text-base text-linen">{name}</p>
+                    <p className="text-base text-jungleTeal">{price}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card className="motion-up delay-4 border-linen/20 bg-gunmetal/80">
+              <CardHeader className="pb-3">
+                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
+                  <Popcorn className="h-4 w-4" />
+                  Snacks
+                </p>
+              </CardHeader>
+              <CardContent className="space-y-3 p-6 pt-0">
+                {snacks.map(([name, price], idx) => (
+                  <div
+                    key={name}
+                    className="motion-up flex items-end justify-between gap-4 border-b border-linen/15 pb-3 last:border-b-0"
+                    style={{ animationDelay: `${idx * 50}ms` }}
+                  >
+                    <p className="text-base text-linen">{name}</p>
+                    {price ? <p className="text-base text-lobsterPink">{price}</p> : null}
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
         </div>
-
-        <Card className="motion-up border-linen/20 bg-gunmetal/80">
-          <CardContent className="grid gap-x-8 gap-y-4 p-6 md:grid-cols-2 md:p-8">
-            {draftBeer.map(([name, price], idx) => (
-              <div key={name} className="motion-up flex items-end justify-between border-b border-linen/15 pb-3" style={{ animationDelay: `${idx * 50}ms` }}>
-                <p className="font-display text-2xl text-linen">{name}</p>
-                <p className="text-lg text-jungleTeal">{price}</p>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
       </section>
 
       <section id="spirits" className="container pb-16 md:pb-20">
@@ -292,30 +555,26 @@ export default function Home() {
 
         <Card className="motion-up border-linen/20 bg-gunmetal/80">
           <CardContent className="grid gap-x-8 gap-y-6 p-6 md:grid-cols-2 md:p-8">
-            {spiritColumns.map((column, columnIdx) => (
-              <div key={`spirits-column-${columnIdx}`} className="space-y-6">
-                {column.map((group, groupIdx) => (
-                  <div
-                    key={group.category}
-                    className="motion-up border-b border-linen/15 pb-5"
-                    style={{ animationDelay: `${(columnIdx * 5 + groupIdx) * 50}ms` }}
-                  >
-                    <CardTitle className="mb-3 font-display text-3xl text-linen">
-                      {group.category}
-                    </CardTitle>
-                    <ul className="space-y-1.5 text-sm text-linen/85">
-                      {group.items.map((item) => {
-                        const { name, price } = splitPrice(item);
-                        return (
-                          <li key={item} className="flex items-center justify-between gap-4">
-                            <span>{name}</span>
-                            <span className="shrink-0 text-jungleTeal">{price}</span>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                ))}
+            {spirits.map((group, idx) => (
+              <div
+                key={group.category}
+                className="motion-up border-b border-linen/15 pb-5"
+                style={{ animationDelay: `${idx * 50}ms` }}
+              >
+                <CardTitle className="mb-3 font-display text-3xl text-linen">
+                  {group.category}
+                </CardTitle>
+                <ul className="space-y-1.5 text-sm text-linen/85">
+                  {group.items.map((item) => {
+                    const { name, price } = splitPrice(item);
+                    return (
+                      <li key={item} className="flex items-center justify-between gap-4">
+                        <span>{name}</span>
+                        <span className="shrink-0 text-jungleTeal">{price}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             ))}
           </CardContent>
@@ -327,11 +586,19 @@ export default function Home() {
           <Card className="motion-up hover-lift border-linen/20 bg-gunmetal/85 text-linen">
             <CardHeader>
               <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Visit Us</p>
-              <CardTitle className="font-display text-3xl md:text-4xl">772 S Virginia St, Reno, NV 89509</CardTitle>
+              <CardTitle className="font-display text-3xl md:text-4xl">
+                772 S Virginia St, Reno, NV 89509
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-5 text-sm text-linen/85">
-              <p className="flex items-center gap-3"><Phone className="h-4 w-4 text-jungleTeal" />(775) 273-8146</p>
-              <p className="flex items-center gap-3"><Mail className="h-4 w-4 text-jungleTeal" />info@atlaslanding.bar</p>
+              <p className="flex items-center gap-3">
+                <Phone className="h-4 w-4 text-jungleTeal" />
+                (775) 273-8146
+              </p>
+              <p className="flex items-center gap-3">
+                <Mail className="h-4 w-4 text-jungleTeal" />
+                info@atlaslanding.bar
+              </p>
               <div className="flex items-start gap-3">
                 <Clock3 className="mt-0.5 h-4 w-4 text-jungleTeal" />
                 <ul className="space-y-1">
@@ -342,9 +609,30 @@ export default function Home() {
               </div>
               <Separator className="bg-linen/20" />
               <div className="grid gap-3">
-                <Link href="http://maps.apple.com/?daddr=772+S+Virginia+St,+Reno+NV" target="_blank" className="inline-flex items-center gap-2 text-sandDune hover:text-linen"><MapPin className="h-4 w-4" />Open in Maps</Link>
-                <Link href="https://www.instagram.com/atlaslanding/" target="_blank" className="inline-flex items-center gap-2 text-sandDune hover:text-linen"><Instagram className="h-4 w-4" />@atlaslanding</Link>
-                <Link href="https://www.facebook.com/profile.php?id=100095380789651" target="_blank" className="inline-flex items-center gap-2 text-sandDune hover:text-linen"><Facebook className="h-4 w-4" />Facebook</Link>
+                <Link
+                  href="http://maps.apple.com/?daddr=772+S+Virginia+St,+Reno+NV"
+                  target="_blank"
+                  className="inline-flex items-center gap-2 text-sandDune hover:text-linen"
+                >
+                  <MapPin className="h-4 w-4" />
+                  Open in Maps
+                </Link>
+                <Link
+                  href="https://www.instagram.com/atlaslanding/"
+                  target="_blank"
+                  className="inline-flex items-center gap-2 text-sandDune hover:text-linen"
+                >
+                  <Instagram className="h-4 w-4" />
+                  @atlaslanding
+                </Link>
+                <Link
+                  href="https://www.facebook.com/profile.php?id=100095380789651"
+                  target="_blank"
+                  className="inline-flex items-center gap-2 text-sandDune hover:text-linen"
+                >
+                  <Facebook className="h-4 w-4" />
+                  Facebook
+                </Link>
               </div>
             </CardContent>
           </Card>
@@ -366,7 +654,9 @@ export default function Home() {
           <div className="grid md:grid-cols-[1fr_1.1fr]">
             <CardHeader className="border-b border-linen/15 md:border-b-0 md:border-r">
               <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Events & Inquiries</p>
-              <CardTitle className="font-display text-3xl md:text-4xl">Tell us your night plan.</CardTitle>
+              <CardTitle className="font-display text-3xl md:text-4xl">
+                Tell us your night plan.
+              </CardTitle>
               <p className="text-linen/80">
                 Private events, birthdays, large groups, and collaborations.
                 We will reply with options and timing.

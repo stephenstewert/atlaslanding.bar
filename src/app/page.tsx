@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  Beer,
   Clock3,
   Facebook,
   Instagram,
   Mail,
   MapPin,
+  Martini,
   Music4,
   Phone,
   Popcorn,
@@ -433,12 +435,15 @@ export default function Home() {
           <div className="grid gap-6">
             <Card className="motion-up border-linen/20 bg-gunmetal/80">
               <CardHeader className="pb-2">
-                <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Cocktails</p>
+                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
+                  <Martini className="h-4 w-4" />
+                  Cocktails
+                </p>
                 <CardTitle className="font-display text-3xl text-linen md:text-4xl">
                   Signatures
                 </CardTitle>
               </CardHeader>
-              <CardContent className="grid gap-4 p-6 pt-2 md:grid-cols-2 md:p-8 md:pt-2">
+              <CardContent className="grid gap-4 p-6 pt-2 md:p-8 md:pt-2">
                 {signatureCocktails.map((item, idx) => (
                   <div
                     key={item.name}
@@ -457,12 +462,15 @@ export default function Home() {
 
             <Card className="motion-up delay-1 border-linen/20 bg-gunmetal/80">
               <CardHeader className="pb-2">
-                <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Cocktails</p>
+                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
+                  <Martini className="h-4 w-4" />
+                  Cocktails
+                </p>
                 <CardTitle className="font-display text-3xl text-linen md:text-4xl">
                   Seasonal Creations
                 </CardTitle>
               </CardHeader>
-              <CardContent className="grid gap-4 p-6 pt-2 md:grid-cols-2 md:p-8 md:pt-2">
+              <CardContent className="grid gap-4 p-6 pt-2 md:p-8 md:pt-2">
                 {seasonalCocktails.map((item, idx) => (
                   <div
                     key={item.name}
@@ -505,7 +513,7 @@ export default function Home() {
             <Card className="motion-up delay-3 border-linen/20 bg-gunmetal/80">
               <CardHeader className="pb-3">
                 <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
-                  <Sparkles className="h-4 w-4" />
+                  <Beer className="h-4 w-4" />
                   Draft Beer
                 </p>
               </CardHeader>

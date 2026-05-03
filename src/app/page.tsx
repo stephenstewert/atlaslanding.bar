@@ -273,6 +273,15 @@ const snacks = [
   ["OBOUR Hummus & Pita Chips", "$12"]
 ];
 
+const spiritHighlights = [
+  ["Rare Bourbon", "Michter's 10", "$55"],
+  ["Japanese Whisky", "Hakushu 12", "$35"],
+  ["Aged Rum", "Four Square Empery", "$20"],
+  ["Single Malt", "Glenlivet Nadurra 16", "$35"]
+];
+
+const spiritBottleCount = spirits.reduce((total, group) => total + group.items.length, 0);
+
 const hours = [
   "Monday: 3pm - 10pm",
   "Tuesday: 3pm - 10pm",
@@ -426,13 +435,10 @@ export default function Home() {
             <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Current Menu</p>
             <h2 className="font-display text-4xl text-linen md:text-5xl">Now Pouring</h2>
           </div>
-          <Badge variant="outline" className="hidden border-linen/30 text-linen sm:inline-flex">
-            Updated from house PDF
-          </Badge>
         </div>
 
-        <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-          <div className="grid gap-6">
+        <div className="grid items-start gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+          <div className="grid content-start gap-6">
             <Card className="motion-up border-linen/20 bg-gunmetal/80">
               <CardHeader className="pb-2">
                 <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
@@ -443,11 +449,11 @@ export default function Home() {
                   Signatures
                 </CardTitle>
               </CardHeader>
-              <CardContent className="grid gap-4 p-6 pt-2 md:p-8 md:pt-2">
+              <CardContent className="grid gap-3 px-6 pb-5 pt-2 md:px-8 md:pb-6 md:pt-2">
                 {signatureCocktails.map((item, idx) => (
                   <div
                     key={item.name}
-                    className="motion-up border-b border-linen/15 pb-4"
+                    className="motion-up border-b border-linen/15 pb-3 last:border-b-0 last:pb-0"
                     style={{ animationDelay: `${idx * 60}ms` }}
                   >
                     <div className="mb-2 flex items-end justify-between gap-4">
@@ -470,11 +476,11 @@ export default function Home() {
                   Seasonal Creations
                 </CardTitle>
               </CardHeader>
-              <CardContent className="grid gap-4 p-6 pt-2 md:p-8 md:pt-2">
+              <CardContent className="grid gap-3 px-6 pb-5 pt-2 md:px-8 md:pb-6 md:pt-2">
                 {seasonalCocktails.map((item, idx) => (
                   <div
                     key={item.name}
-                    className="motion-up border-b border-linen/15 pb-4"
+                    className="motion-up border-b border-linen/15 pb-3 last:border-b-0 last:pb-0"
                     style={{ animationDelay: `${idx * 60}ms` }}
                   >
                     <div className="mb-2 flex items-end justify-between gap-4">
@@ -556,37 +562,100 @@ export default function Home() {
       </section>
 
       <section id="spirits" className="container pb-16 md:pb-20">
-        <div className="mb-8">
-          <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Back Bar</p>
-          <h2 className="font-display text-4xl text-linen md:text-5xl">Spirits Selection</h2>
+        <div className="mb-8 grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(360px,0.55fr)] lg:items-end">
+          <div>
+            <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Back Bar</p>
+            <h2 className="font-display text-4xl text-linen md:text-5xl">Spirits Selection</h2>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-linen/75 md:text-base">
+              Browse by spirit family, then follow the price markers across the shelf. Longer
+              whiskey lists split into columns so the back bar feels like a menu, not homework.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 overflow-hidden rounded-2xl border border-linen/15 bg-linen/[0.06] text-linen shadow-2xl shadow-black/10 sm:max-w-md lg:justify-self-end">
+            <div className="border-r border-linen/15 p-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-sandDune">Bottles</p>
+              <p className="mt-2 font-display text-4xl">{spiritBottleCount}</p>
+            </div>
+            <div className="p-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-sandDune">Families</p>
+              <p className="mt-2 font-display text-4xl">{spirits.length}</p>
+            </div>
+          </div>
         </div>
 
-        <Card className="motion-up border-linen/20 bg-gunmetal/80">
-          <CardContent className="grid gap-x-8 gap-y-6 p-6 md:grid-cols-2 md:p-8">
-            {spirits.map((group, idx) => (
-              <div
+        <div className="motion-up mb-5 flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] md:flex-wrap md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden">
+          {spirits.map((group) => (
+            <Badge
+              key={group.category}
+              variant="outline"
+              className="shrink-0 rounded-full border-linen/20 bg-black/10 px-3 py-1.5 text-xs text-linen/80"
+            >
+              {group.category}
+            </Badge>
+          ))}
+        </div>
+
+        <div className="motion-up mb-6 grid gap-3 md:grid-cols-4">
+          {spiritHighlights.map(([label, name, price], idx) => (
+            <div
+              key={name}
+              className="rounded-2xl border border-lobsterPink/25 bg-gradient-to-br from-lobsterPink/20 to-linen/[0.04] p-4"
+              style={{ animationDelay: `${idx * 50}ms` }}
+            >
+              <p className="text-[0.7rem] uppercase tracking-[0.22em] text-sandDune">{label}</p>
+              <p className="mt-2 min-h-12 font-display text-2xl leading-none text-linen">{name}</p>
+              <p className="mt-3 text-lg text-lobsterPink">{price}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid items-start gap-4 lg:grid-cols-2">
+          {spirits.map((group, idx) => {
+            const isDeepList = group.items.length > 10;
+
+            return (
+              <article
                 key={group.category}
-                className="motion-up border-b border-linen/15 pb-5"
+                className={`motion-up overflow-hidden rounded-2xl border border-linen/15 bg-gunmetal/80 shadow-xl shadow-black/10 ${
+                  group.category === "Bourbon" ? "lg:col-span-2" : ""
+                }`}
                 style={{ animationDelay: `${idx * 50}ms` }}
               >
-                <CardTitle className="mb-3 font-display text-3xl text-linen">
-                  {group.category}
-                </CardTitle>
-                <ul className="space-y-1.5 text-sm text-linen/85">
+                <div className="flex items-center justify-between gap-4 border-b border-linen/15 bg-linen/[0.04] px-5 py-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-sandDune">
+                      {group.items.length} pours
+                    </p>
+                    <h3 className="mt-1 font-display text-3xl text-linen">{group.category}</h3>
+                  </div>
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-jungleTeal/40 bg-jungleTeal/15 font-display text-xl text-linen">
+                    {group.category.slice(0, 1)}
+                  </div>
+                </div>
+                <ul
+                  className={`grid gap-x-8 px-5 py-4 text-sm text-linen/85 ${
+                    isDeepList ? "sm:grid-cols-2" : ""
+                  } ${group.category === "Bourbon" ? "xl:grid-cols-3" : ""}`}
+                >
                   {group.items.map((item) => {
                     const { name, price } = splitPrice(item);
                     return (
-                      <li key={item} className="flex items-center justify-between gap-4">
-                        <span>{name}</span>
-                        <span className="shrink-0 text-jungleTeal">{price}</span>
+                      <li
+                        key={item}
+                        className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3 border-b border-linen/10 py-2.5 last:border-b-0"
+                      >
+                        <span className="leading-5">{name}</span>
+                        <span className="rounded-full bg-jungleTeal/15 px-2 py-0.5 text-xs text-jungleTeal">
+                          {price}
+                        </span>
                       </li>
                     );
                   })}
                 </ul>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+              </article>
+            );
+          })}
+        </div>
       </section>
 
       <section id="visit" className="container pb-20">

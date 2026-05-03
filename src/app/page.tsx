@@ -116,7 +116,22 @@ function splitPrice(line: string) {
   return { name, price };
 }
 
+function splitIntoBalancedColumns<T extends { items: string[] }>(groups: T[]) {
+  const columns: [T[], T[]] = [[], []];
+  const totals = [0, 0];
+
+  for (const group of groups) {
+    const targetColumn = totals[0] <= totals[1] ? 0 : 1;
+    columns[targetColumn].push(group);
+    totals[targetColumn] += group.items.length;
+  }
+
+  return columns;
+}
+
 export default function Home() {
+  const spiritColumns = splitIntoBalancedColumns(spirits);
+
   return (
     <main className="relative overflow-hidden">
       <SiteHeader logoSrc={assets.logo} />
@@ -251,39 +266,39 @@ export default function Home() {
         </Card>
       </section>
 
-      <section className="container pb-12 md:pb-16 lg:pb-12">
-        <div className="grid items-start gap-6 lg:grid-cols-2">
-          <article id="beer" className="lg:translate-y-10">
-            <div className="mb-8">
-              <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Draft Beer</p>
-              <h2 className="font-display text-4xl text-linen md:text-5xl">On Tap</h2>
-            </div>
+      <section id="beer" className="container pb-16 md:pb-20">
+        <div className="mb-8">
+          <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Draft Beer</p>
+          <h2 className="font-display text-4xl text-linen md:text-5xl">On Tap</h2>
+        </div>
 
-            <Card className="motion-up border-linen/20 bg-gunmetal/80">
-              <CardContent className="grid gap-x-8 gap-y-4 p-6 md:grid-cols-2 md:p-8">
-                {draftBeer.map(([name, price], idx) => (
-                  <div key={name} className="motion-up flex items-end justify-between border-b border-linen/15 pb-3" style={{ animationDelay: `${idx * 50}ms` }}>
-                    <p className="font-display text-2xl text-linen">{name}</p>
-                    <p className="text-lg text-jungleTeal">{price}</p>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </article>
+        <Card className="motion-up border-linen/20 bg-gunmetal/80">
+          <CardContent className="grid gap-x-8 gap-y-4 p-6 md:grid-cols-2 md:p-8">
+            {draftBeer.map(([name, price], idx) => (
+              <div key={name} className="motion-up flex items-end justify-between border-b border-linen/15 pb-3" style={{ animationDelay: `${idx * 50}ms` }}>
+                <p className="font-display text-2xl text-linen">{name}</p>
+                <p className="text-lg text-jungleTeal">{price}</p>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </section>
 
-          <article id="spirits" className="lg:-translate-y-8">
-            <div className="mb-8">
-              <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Back Bar</p>
-              <h2 className="font-display text-4xl text-linen md:text-5xl">Spirits Selection</h2>
-            </div>
+      <section id="spirits" className="container pb-16 md:pb-20">
+        <div className="mb-8">
+          <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Back Bar</p>
+          <h2 className="font-display text-4xl text-linen md:text-5xl">Spirits Selection</h2>
+        </div>
 
-            <Card className="motion-up border-linen/20 bg-gunmetal/80">
-              <CardContent className="grid gap-x-8 gap-y-6 p-6 md:grid-cols-2 md:p-8">
-                {spirits.map((group, idx) => (
+        <Card className="motion-up border-linen/20 bg-gunmetal/80">
+          <CardContent className="grid gap-x-8 gap-y-6 p-6 md:grid-cols-2 md:p-8">
+            {spiritColumns.map((column, columnIdx) => (
+              <div key={`spirits-column-${columnIdx}`} className="space-y-6">
+                {column.map((group, groupIdx) => (
                   <div
                     key={group.category}
                     className="motion-up border-b border-linen/15 pb-5"
-                    style={{ animationDelay: `${idx * 50}ms` }}
+                    style={{ animationDelay: `${(columnIdx * 5 + groupIdx) * 50}ms` }}
                   >
                     <CardTitle className="mb-3 font-display text-3xl text-linen">
                       {group.category}
@@ -301,13 +316,13 @@ export default function Home() {
                     </ul>
                   </div>
                 ))}
-              </CardContent>
-            </Card>
-          </article>
-        </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
       </section>
 
-      <section id="visit" className="container pb-20 lg:-mt-6">
+      <section id="visit" className="container pb-20">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
           <Card className="motion-up hover-lift border-linen/20 bg-gunmetal/85 text-linen">
             <CardHeader>

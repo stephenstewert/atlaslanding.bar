@@ -28,7 +28,7 @@ export default function Home() {
       <header className="site-header">
         <a className="brand-link" href="#top" aria-label="Atlas Landing home">
           <span className="brand-logo-wrap">
-            <Image className="brand-logo" src="/atlas-logo.svg" alt="" width={56} height={56} priority />
+            <Image className="brand-logo" src="/atlas-arrow.svg" alt="" width={40} height={48} priority />
           </span>
           <span className="wordmark">Atlas Landing</span>
         </a>

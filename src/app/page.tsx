@@ -1,691 +1,177 @@
-import Image from "next/image";
-import Link from "next/link";
-import {
-  Beer,
-  Clock3,
-  Facebook,
-  Instagram,
-  Mail,
-  MapPin,
-  Martini,
-  Music4,
-  Phone,
-  Popcorn,
-  Sparkles,
-  Users,
-  Wine
-} from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ContactForm } from "@/components/contact-form";
-import { SiteHeader } from "@/components/site-header";
-import { Separator } from "@/components/ui/separator";
-
-const assets = {
-  logo: "https://cdn.prod.website-files.com/643b06564581272492d75842/64ee88e0afb4f279136f0253_green%20logo.svg",
-  hero: "https://cdn.prod.website-files.com/643b06564581272492d75842/64aeefdd6b8c0c941a3baee4_IMG_1924-min.JPG",
-  gallery: "https://cdn.prod.website-files.com/643b06564581272492d75842/66e384bba07e40107a7b066f_IMG_2684%203-2.jpg"
-};
-
-const signatureCocktails = [
-  {
-    name: "Midnight 75",
-    price: "$14",
-    description: "Gray Whale Gin, Lemon, Simple, Blackberry Puree, Bubbles"
-  },
-  {
-    name: "Passion Spark",
-    price: "$14",
-    description: "Fris Vodka, Passoa, Lime, Agave, Sparkling Water"
-  },
-  {
-    name: "Heatwave",
-    price: "$13",
-    description: "Corazon Tequila, Jalapeno, Agave, Lime, Ginger Beer"
-  },
-  {
-    name: "Blood Orange Spritz",
-    price: "$14",
-    description: "Aperol, SP Blood Orange, Wycliffe Brut, Sparkling Water"
-  }
-];
-
-const seasonalCocktails = [
-  {
-    name: "Garden Society",
-    price: "$15",
-    description: "Ketel Cucumber Mint, Lemon, Raspberry, Black Tea, Sparkling"
-  },
-  {
-    name: "In Bloom",
-    price: "$15",
-    description: "Fris Vodka, Grind Coffee Liquor, Bailey's, Lavender, Espresso"
-  },
-  {
-    name: "Wildflower Sour",
-    price: "$15",
-    description: "Jameson, Elderflower, Honey, Lemon, Pomegranate Foam"
-  },
-  {
-    name: "Honeyglass",
-    price: "$14",
-    description: "Corazon Tequila, Aperol, Lemon, Honey, Orange Bitters"
-  }
-];
-
-const wineByTheGlass = [
-  ["Benvolio Prosecco", "$13"],
-  ["La Marca Prosecco", "$13"],
-  ["Los Morros Sauv Blanc", "$13"],
-  ["Los Morros Cabernet", "$13"],
-  ["Valderba Garnacha", "$13"],
-  ["Kransno Merlot", "$13"],
-  ["Conundrum Red Blend", "$13"],
-  ["Avaline Cabernet", "$14"],
-  ["La Crema Pinot Noir", "$13"],
-  ["Lucien Albrecht Brut Rose", "$14"]
-];
-
-const draftBeer = [
-  ["Boneyard DTH IPA", "$8"],
-  ["Sierra Nevada Pilsner", "$7"],
-  ["Modelo", "$7"],
-  ["Sapporo", "$8"],
-  ["805 Blonde", "$8"],
-  ["805 Cerveza", "$8"],
-  ["Deschutes Porter", "$8"],
-  ["Boneyard Red Ale", "$8"],
-  ["Guinness", "$8"]
-];
-
-const spirits = [
-  {
-    category: "Gin",
-    items: [
-      "Nolet's $12",
-      "Hendrick's Neptunia $12",
-      "Hendrick's $11",
-      "Gray Whale $9",
-      "Theory 002 $9",
-      "Russell Henry $9",
-      "Empress $9",
-      "Malfy Italian Lemon $8",
-      "Aviation $8",
-      "Few $8",
-      "Tanqueray $8",
-      "Bombay Sapphire $8"
-    ]
-  },
-  {
-    category: "Vodka",
-    items: [
-      "Elit Eighteen $11",
-      "Ketel One Grapefruit and Rose $9",
-      "Ketel One Cucumber and Mint $9",
-      "Absolut Elyx $9",
-      "Grey Goose $9",
-      "Ketel One $8",
-      "Source One Oak Sherry Casks $8",
-      "Hera the Dog $8",
-      "Tahoe Blue $8",
-      "Tito's $8"
-    ]
-  },
-  {
-    category: "Tequila",
-    items: [
-      "Casa Dragones Anejo $15",
-      "Casa Dragones Blanco $13",
-      "El Sativo Anejo $13",
-      "El Sativo Reposado $12",
-      "Casamigos Reposado $13",
-      "Casamigos Blanco $11",
-      "Fortaleza Blanco $11",
-      "El Sativo Blanco $10",
-      "Herradura Reposado $10",
-      "Puntagave Blanco $10",
-      "Casa Noble Blanco $9",
-      "Cazadores Reposado $8"
-    ]
-  },
-  {
-    category: "Rum",
-    items: [
-      "Four Square Empery Single Blended Rum $20",
-      "Four Square 2007 Single Blended Rum $15",
-      "Opthimus 21 Year Rum $15",
-      "Don Q Double Aged Puerto Rican Rum $14",
-      "Centenario 20 Year $12",
-      "Four Square Zinfandel Cask Blend $11",
-      "Plantation Pineapple Rum $8",
-      "Clement Single Barrel Caribbean Rum $8",
-      "Don Q Oak Barrel Spiced $8",
-      "Smith and Cross Jamaica Rum $7"
-    ]
-  },
-  {
-    category: "Irish Whiskey",
-    items: [
-      "Redbreast 12 Year $15",
-      "Green Spot $15",
-      "Writer's Tears $12",
-      "Knappogue 12 Year $10",
-      "Jameson $8"
-    ]
-  },
-  {
-    category: "Japanese Whiskey",
-    items: [
-      "Suntory Hakushu 12 Year $35",
-      "Nikka Single Malt Yoichi $30",
-      "Yamazaki 12 Year $25",
-      "Nikka From the Barrel $11",
-      "Iwai Mars Whisky $10",
-      "Nikka Coffey Grain Whisky $9",
-      "Suntory Toki $8"
-    ]
-  },
-  {
-    category: "Bourbon",
-    items: [
-      "Michter's Single Barrel 10 $55",
-      "Elijah Craig $35",
-      "Clyde May's 10 Year $25",
-      "Wild Turkey Decades $25",
-      "Blood Oath Pact No.6 $22",
-      "Blood Oath Pact No.4 $20",
-      "Little Book Chapter 03: The Road Home $20",
-      "Blanton's $18",
-      "Eagle Rare $18",
-      "Little Book Chapter 02: No Simple Task $17",
-      "Weller Special Reserve $15",
-      "Rebel Yell Single Barrel 10 Year $14",
-      "Wild Turkey Kentucky Spirit Single Barrel $14",
-      "Four Roses Single Barrel $12",
-      "Basil Hayden Toast $12",
-      "Clyde May's $12",
-      "Wild Turkey Rare Breed $12",
-      "Bulleit 10 Year $11",
-      "Larceny $11",
-      "The Wiseman $11",
-      "Broken Barrel Cask Strength $11",
-      "Uncle Nearest 1884 $10",
-      "Baker's 7 Year $9",
-      "Frey Ranch $9",
-      "Woodford Reserve $9",
-      "Broken Barrel California Oak $9",
-      "Whistle Pig Piggyback $9",
-      "Basil Hayden $9",
-      "Howler Head Banana Whiskey $9",
-      "Four Roses Small Batch Select $9",
-      "Maker's Mark $8",
-      "Pendleton $8"
-    ]
-  },
-  {
-    category: "Rye",
-    items: [
-      "Peerless Rye $25",
-      "Whistle Pig Roadstock $20",
-      "Barrel Rye $15",
-      "Angel's Envy $15",
-      "Basil Hayden Dark Rye $12",
-      "Frey Ranch $12",
-      "Sazerac $9",
-      "Bulleit $8"
-    ]
-  },
-  {
-    category: "Scotch",
-    items: [
-      "Glenlivet Nadurra 16 Year $35",
-      "Jura Single Malt 18 Year $22",
-      "Baller Single Malt $20",
-      "Aultmore Speyside Single Malt 12 Year $20",
-      "Bunnahabhain Islay Single Malt 18 Year $20",
-      "Springbank 15 Year $20",
-      "Lagavulin 8 Year $15",
-      "Drambuie 15 Year $14",
-      "Highland Park Valkyrie $12",
-      "Auchentoshan The Bartenders Malt $12",
-      "Johnnie Walker Green Label 15 Year Blended Malt $10",
-      "Glenfiddich Single Malt 12 Year $9",
-      "The Glenrothes Select Reserve Speyside Single Malt $7"
-    ]
-  },
-  {
-    category: "Misc.",
-    items: [
-      "Crown Royal Noble Collection $11",
-      "Screwball Peanut Butter Whiskey $9",
-      "Ballotin Caramel Turtle Whisky $9",
-      "Jack Daniel's Sour Mash $7",
-      "Jameson $8"
-    ]
-  }
-];
-
-const snacks = [
-  ["Peanuts", ""],
-  ["Pub Mix", ""],
-  ["OBOUR Hummus & Pita Chips", "$12"]
-];
-
-const hours = [
-  "Monday: 3pm - 10pm",
-  "Tuesday: 3pm - 10pm",
-  "Wednesday: 3pm - 10pm",
-  "Thursday: 3pm - 10pm",
-  "Friday: 4pm - 12am",
-  "Saturday: 4pm - 12am",
-  "Sunday: Closed"
-];
-
-function splitPrice(line: string) {
-  const match = line.match(/\s(\$\d+)\s*$/);
-  if (!match) {
-    return { name: line, price: "" };
-  }
-
-  const price = match[1];
-  const name = line.slice(0, line.length - match[0].length);
-  return { name, price };
-}
+const Arrow = () => <span aria-hidden="true">↗</span>;
 
 export default function Home() {
   return (
-    <main className="relative overflow-hidden">
-      <SiteHeader logoSrc={assets.logo} />
+    <main>
+      <header className="site-header">
+        <a className="wordmark" href="#top" aria-label="Atlas Landing home">
+          Atlas Landing
+        </a>
+        <nav className="desktop-nav" aria-label="Main navigation">
+          <a href="#menu">Menu</a>
+          <a href="#story">About</a>
+          <a href="#events">Private Events</a>
+        </nav>
+        <a
+          className="address-link"
+          href="https://maps.apple.com/?address=772%20S%20Virginia%20St,%20Reno,%20NV%2089501"
+          target="_blank"
+          rel="noreferrer"
+        >
+          772 S Virginia St <Arrow />
+        </a>
+        <a className="mobile-menu" href="#menu">Menu</a>
+      </header>
 
-      <section id="home" className="relative min-h-screen">
-        <Image
-          src={assets.hero}
-          alt="Atlas Landing hero"
-          fill
-          priority
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-gunmetal" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(183,109,104,0.25),transparent_45%)]" />
-
-        <div className="container relative z-10 flex min-h-screen items-end pb-14 pt-28 md:items-center md:pb-0 md:pt-36">
-          <div className="max-w-4xl">
-            <Badge className="motion-up mb-6 rounded-full bg-secondary/90 px-4 py-1 text-secondary-foreground">
-              Midtown Reno
-            </Badge>
-            <h1 className="motion-up delay-1 font-display text-4xl leading-[0.95] text-linen sm:text-5xl md:text-8xl">
-              Where late nights
-              <br />
-              pour better.
-            </h1>
-            <p className="motion-up delay-2 mt-5 max-w-2xl text-base text-linen/85 md:mt-6 md:text-lg">
-              Atlas Landing is a cocktail bar built for long conversations,
-              deep playlists, and a menu that moves from spritzes to wine to late-night snacks.
-            </p>
-            <div className="motion-up delay-3 mt-7 flex flex-wrap gap-3 md:mt-8">
-              <Button asChild size="lg" className="w-full rounded-full px-8 sm:w-auto">
-                <Link href="#menu">View Menu</Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="w-full rounded-full border-linen/40 bg-black/20 px-8 text-linen hover:bg-black/35 sm:w-auto"
-              >
-                <Link href="#visit">Get Directions</Link>
-              </Button>
+      <section className="hero" id="top">
+        <div className="hero-copy">
+          <p className="eyebrow">Midtown Reno <span>•</span> Cocktail Bar</p>
+          <h1>Where late nights<br />pour better.</h1>
+          <p className="hero-intro">
+            A cocktail bar for long conversations, deep playlists, wine and
+            late-night snacks.
+          </p>
+          <div className="hero-actions">
+            <a className="button button-primary" href="#menu">View Menu</a>
+            <a className="text-link" href="https://maps.apple.com/?address=772%20S%20Virginia%20St,%20Reno,%20NV%2089501" target="_blank" rel="noreferrer">
+              Get Directions <Arrow />
+            </a>
+          </div>
+          <div className="hero-meta">
+            <div>
+              <span>Weeknights</span>
+              <p>3 PM–10 PM</p>
+            </div>
+            <div>
+              <span>Find us</span>
+              <p>772 S Virginia St</p>
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="container relative z-20 -mt-10 pb-16 md:-mt-12 md:pb-20">
-        <div className="grid gap-4 md:grid-cols-3">
-          <Card className="motion-up hover-lift border-lobsterPink/40 bg-gunmetal/80">
-            <CardContent className="p-6 text-linen">
-              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune">
-                <Sparkles className="h-4 w-4" />
-                Signature Program
-              </p>
-              <p className="text-2xl font-display">House signatures with bright seasonal swings</p>
-            </CardContent>
-          </Card>
-          <Card className="motion-up delay-1 hover-lift border-jungleTeal/40 bg-gunmetal/80">
-            <CardContent className="p-6 text-linen">
-              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune">
-                <Music4 className="h-4 w-4" />
-                Atmosphere
-              </p>
-              <p className="text-2xl font-display">Moody lighting, vinyl energy, intimate tables</p>
-            </CardContent>
-          </Card>
-          <Card className="motion-up delay-2 hover-lift border-lobsterPink/40 bg-gunmetal/80">
-            <CardContent className="p-6 text-linen">
-              <p className="mb-2 inline-flex items-center gap-2 text-sm text-sandDune">
-                <Users className="h-4 w-4" />
-                Community
-              </p>
-              <p className="text-2xl font-display">Neighborhood regulars and first dates alike</p>
-            </CardContent>
-          </Card>
+        <div className="hero-image" role="img" aria-label="Green lounge seating inside Atlas Landing">
+          <div className="location-tab">Midtown, Reno</div>
         </div>
       </section>
 
-      <section id="story" className="container pb-16 md:pb-20">
-        <div className="grid items-start gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <Card className="motion-up hover-lift border-linen/20 bg-gunmetal/85 text-linen">
-            <CardHeader>
-              <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Atlas Landing</p>
-              <CardTitle className="font-display text-3xl sm:text-4xl md:text-5xl">
-                A Midtown bar with real personality.
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-linen/85">
-              <p>
-                We focus on cocktails, beer, wine, and easy late-night snacks without making the
-                room feel formal. The soundtrack stays on point and the menu keeps things bright,
-                crisp, and social.
-              </p>
-              <p>
-                From opening pours to last call, Atlas is built for people who want a better
-                neighborhood bar experience.
-              </p>
-            </CardContent>
-          </Card>
-          <div className="motion-scale delay-1 justify-self-end overflow-hidden rounded-3xl border border-linen/20 lg:max-w-[420px]">
-            <Image
-              src={assets.gallery}
-              alt="Inside Atlas Landing"
-              width={1200}
-              height={1500}
-              className="aspect-[5/6] max-h-[420px] w-full object-cover"
-            />
-          </div>
+      <div className="ticker" aria-hidden="true">
+        <div>
+          <span>Beer</span><i>•</i><span>Craft Cocktails</span><i>•</i><span>Wine</span><i>•</i><span>Snacks</span><i>•</i><span>Midtown Reno</span><i>•</i>
+          <span>Beer</span><i>•</i><span>Craft Cocktails</span><i>•</i><span>Wine</span><i>•</i><span>Snacks</span><i>•</i><span>Midtown Reno</span><i>•</i>
+        </div>
+      </div>
+
+      <section className="story section" id="story">
+        <div className="section-label">01 / The room</div>
+        <div className="story-heading">
+          <p className="eyebrow">Atlas Landing</p>
+          <h2>A Midtown bar with<br /><em>real personality.</em></h2>
+        </div>
+        <div className="story-copy">
+          <p>
+            We focus on cocktails, beer, wine, and easy late-night snacks
+            without making the room feel formal.
+          </p>
+          <p>
+            The soundtrack stays on point and the menu keeps things bright,
+            crisp, and social. From opening pours to last call, Atlas is built
+            for a better neighborhood bar experience.
+          </p>
         </div>
       </section>
 
-      <section className="motion-up border-y border-linen/15 bg-lobsterPink/20 py-4">
-        <div className="container flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm uppercase tracking-[0.2em] text-sandDune">
-          <span>Beer</span>
-          <span>•</span>
-          <span>Craft Cocktails</span>
-          <span>•</span>
-          <span>Wine</span>
-          <span>•</span>
-          <span>Snacks</span>
-          <span>•</span>
-          <span>Midtown Reno</span>
-        </div>
-      </section>
-
-      <section id="menu" className="container py-14 md:py-16">
-        <div className="mb-10 flex items-end justify-between gap-4">
+      <section className="menu section" id="menu">
+        <div className="menu-intro">
+          <div className="section-label">02 / Now pouring</div>
           <div>
-            <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Current Menu</p>
-            <h2 className="font-display text-4xl text-linen md:text-5xl">Now Pouring</h2>
+            <p className="eyebrow">Current Menu</p>
+            <h2>Drinks worth<br /><em>staying for.</em></h2>
           </div>
+          <p className="menu-note">Seasonal ingredients, straightforward pours, and a back bar that rewards curiosity.</p>
         </div>
 
-        <div className="grid items-start gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-          <div className="grid content-start gap-6">
-            <Card className="motion-up border-linen/20 bg-gunmetal/80">
-              <CardHeader className="pb-2">
-                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
-                  <Martini className="h-4 w-4" />
-                  Cocktails
-                </p>
-                <CardTitle className="font-display text-3xl text-linen md:text-4xl">
-                  Signatures
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="grid gap-3 px-6 pb-5 pt-2 md:px-8 md:pb-6 md:pt-2">
-                {signatureCocktails.map((item, idx) => (
-                  <div
-                    key={item.name}
-                    className="motion-up border-b border-linen/15 pb-3 last:border-b-0 last:pb-0"
-                    style={{ animationDelay: `${idx * 60}ms` }}
-                  >
-                    <div className="mb-2 flex items-end justify-between gap-4">
-                      <p className="font-display text-2xl text-linen">{item.name}</p>
-                      <p className="text-lg text-lobsterPink">{item.price}</p>
-                    </div>
-                    <p className="text-sm leading-6 text-linen/75">{item.description}</p>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+        <div className="menu-grid">
+          <article className="menu-card featured-card">
+            <div className="card-top"><span>01</span><p>House Signatures</p></div>
+            <div className="drink-list">
+              <div><h3>Midnight 75</h3><strong>$14</strong><p>Gray Whale Gin, lemon, blackberry, bubbles</p></div>
+              <div><h3>Passion Spark</h3><strong>$14</strong><p>Vodka, passion fruit, lime, agave, sparkling water</p></div>
+              <div><h3>Heatwave</h3><strong>$13</strong><p>Tequila, jalapeño, agave, lime, ginger beer</p></div>
+              <div><h3>Blood Orange Spritz</h3><strong>$14</strong><p>Aperol, blood orange, brut, sparkling water</p></div>
+            </div>
+          </article>
 
-            <Card className="motion-up delay-1 border-linen/20 bg-gunmetal/80">
-              <CardHeader className="pb-2">
-                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
-                  <Martini className="h-4 w-4" />
-                  Cocktails
-                </p>
-                <CardTitle className="font-display text-3xl text-linen md:text-4xl">
-                  Seasonal Creations
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="grid gap-3 px-6 pb-5 pt-2 md:px-8 md:pb-6 md:pt-2">
-                {seasonalCocktails.map((item, idx) => (
-                  <div
-                    key={item.name}
-                    className="motion-up border-b border-linen/15 pb-3 last:border-b-0 last:pb-0"
-                    style={{ animationDelay: `${idx * 60}ms` }}
-                  >
-                    <div className="mb-2 flex items-end justify-between gap-4">
-                      <p className="font-display text-2xl text-linen">{item.name}</p>
-                      <p className="text-lg text-jungleTeal">{item.price}</p>
-                    </div>
-                    <p className="text-sm leading-6 text-linen/75">{item.description}</p>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
+          <article className="menu-card">
+            <div className="card-top"><span>02</span><p>Seasonal</p></div>
+            <div className="drink-list">
+              <div><h3>Garden Society</h3><strong>$15</strong><p>Cucumber mint vodka, raspberry, black tea, sparkling</p></div>
+              <div><h3>In Bloom</h3><strong>$15</strong><p>Vodka, coffee liqueur, Bailey’s, lavender, espresso</p></div>
+              <div><h3>Wildflower Sour</h3><strong>$15</strong><p>Jameson, elderflower, honey, lemon, pomegranate foam</p></div>
+              <div><h3>Honeyglass</h3><strong>$14</strong><p>Tequila, Aperol, lemon, honey, orange bitters</p></div>
+            </div>
+          </article>
 
-          <div className="grid gap-6">
-            <Card className="motion-up delay-2 border-linen/20 bg-gunmetal/80">
-              <CardHeader className="pb-3">
-                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
-                  <Wine className="h-4 w-4" />
-                  Wines By The Glass
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-3 p-6 pt-0">
-                {wineByTheGlass.map(([name, price], idx) => (
-                  <div
-                    key={name}
-                    className="motion-up flex items-end justify-between gap-4 border-b border-linen/15 pb-3"
-                    style={{ animationDelay: `${idx * 40}ms` }}
-                  >
-                    <p className="text-base text-linen">{name}</p>
-                    <p className="text-base text-lobsterPink">{price}</p>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+          <article className="menu-card compact-card">
+            <div className="card-top"><span>03</span><p>Wine & Beer</p></div>
+            <div className="simple-list">
+              <div><span>Prosecco</span><strong>$13</strong></div>
+              <div><span>Sauvignon Blanc</span><strong>$13</strong></div>
+              <div><span>La Crema Pinot Noir</span><strong>$13</strong></div>
+              <div><span>Lucien Albrecht Brut Rosé</span><strong>$14</strong></div>
+              <div><span>Boneyard DTH IPA</span><strong>$8</strong></div>
+              <div><span>Sierra Nevada Pilsner</span><strong>$7</strong></div>
+              <div><span>Guinness</span><strong>$8</strong></div>
+            </div>
+          </article>
 
-            <Card className="motion-up delay-3 border-linen/20 bg-gunmetal/80">
-              <CardHeader className="pb-3">
-                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
-                  <Beer className="h-4 w-4" />
-                  Draft Beer
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-3 p-6 pt-0">
-                {draftBeer.map(([name, price], idx) => (
-                  <div
-                    key={name}
-                    className="motion-up flex items-end justify-between gap-4 border-b border-linen/15 pb-3"
-                    style={{ animationDelay: `${idx * 40}ms` }}
-                  >
-                    <p className="text-base text-linen">{name}</p>
-                    <p className="text-base text-jungleTeal">{price}</p>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            <Card className="motion-up delay-4 border-linen/20 bg-gunmetal/80">
-              <CardHeader className="pb-3">
-                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-sandDune">
-                  <Popcorn className="h-4 w-4" />
-                  Snacks
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-3 p-6 pt-0">
-                {snacks.map(([name, price], idx) => (
-                  <div
-                    key={name}
-                    className="motion-up flex items-end justify-between gap-4 border-b border-linen/15 pb-3 last:border-b-0"
-                    style={{ animationDelay: `${idx * 50}ms` }}
-                  >
-                    <p className="text-base text-linen">{name}</p>
-                    {price ? <p className="text-base text-lobsterPink">{price}</p> : null}
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
+          <article className="menu-card compact-card snack-card">
+            <div className="card-top"><span>04</span><p>Snacks</p></div>
+            <div className="simple-list">
+              <div><span>Peanuts</span><strong>Ask</strong></div>
+              <div><span>Pub Mix</span><strong>Ask</strong></div>
+              <div><span>Obour Hummus & Pita Chips</span><strong>$12</strong></div>
+            </div>
+            <p className="small-print">Full spirits selection available at the bar, including bourbon, rye, scotch, tequila, gin, rum, vodka, Irish and Japanese whisky.</p>
+          </article>
         </div>
       </section>
 
-      <section id="spirits" className="container pb-16 md:pb-20">
-        <div className="mb-8">
-          <p className="mb-2 text-xs uppercase tracking-[0.25em] text-sandDune">Back Bar</p>
-          <h2 className="font-display text-4xl text-linen md:text-5xl">Spirits Selection</h2>
+      <section className="events" id="events">
+        <div className="events-copy">
+          <div className="section-label">03 / Gather here</div>
+          <p className="eyebrow">Private Events</p>
+          <h2>Tell us your<br /><em>night plan.</em></h2>
+          <p>Private events, birthdays, large groups, and collaborations. Send the basics and we’ll reply with options and timing.</p>
+          <a className="button button-light" href="mailto:info@atlaslanding.bar?subject=Private%20Event%20Inquiry">Start an Inquiry <Arrow /></a>
         </div>
-
-        <Card className="motion-up border-linen/20 bg-gunmetal/80">
-          <CardContent className="grid gap-4 p-4 md:grid-cols-2 md:p-6">
-            {spirits.map((group, idx) => {
-              const isLongList = group.items.length > 10;
-
-              return (
-                <section
-                  key={group.category}
-                  className={`motion-up rounded-lg border border-linen/10 bg-linen/[0.035] p-4 ${
-                    group.category === "Bourbon" ? "md:col-span-2" : ""
-                  }`}
-                  style={{ animationDelay: `${idx * 50}ms` }}
-                >
-                  <CardTitle className="mb-4 border-b border-linen/15 pb-3 font-display text-2xl text-linen md:text-3xl">
-                    {group.category}
-                  </CardTitle>
-                  <ul
-                    className={`grid gap-x-7 text-sm text-linen/85 ${
-                      isLongList ? "sm:grid-cols-2" : ""
-                    } ${group.category === "Bourbon" ? "lg:grid-cols-3" : ""}`}
-                  >
-                    {group.items.map((item) => {
-                      const { name, price } = splitPrice(item);
-                      return (
-                        <li
-                          key={item}
-                          className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3 border-b border-linen/10 py-2 last:border-b-0"
-                        >
-                          <span className="leading-5">{name}</span>
-                          <span className="shrink-0 text-jungleTeal">{price}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </section>
-              );
-            })}
-          </CardContent>
-        </Card>
-      </section>
-
-      <section id="visit" className="container pb-20">
-        <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-          <Card className="motion-up hover-lift border-linen/20 bg-gunmetal/85 text-linen">
-            <CardHeader>
-              <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Visit Us</p>
-              <CardTitle className="font-display text-3xl md:text-4xl">
-                772 S Virginia St, Reno, NV 89509
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-5 text-sm text-linen/85">
-              <p className="flex items-center gap-3">
-                <Phone className="h-4 w-4 text-jungleTeal" />
-                (775) 273-8146
-              </p>
-              <p className="flex items-center gap-3">
-                <Mail className="h-4 w-4 text-jungleTeal" />
-                info@atlaslanding.bar
-              </p>
-              <div className="flex items-start gap-3">
-                <Clock3 className="mt-0.5 h-4 w-4 text-jungleTeal" />
-                <ul className="space-y-1">
-                  {hours.map((time) => (
-                    <li key={time}>{time}</li>
-                  ))}
-                </ul>
-              </div>
-              <Separator className="bg-linen/20" />
-              <div className="grid gap-3">
-                <Link
-                  href="http://maps.apple.com/?daddr=772+S+Virginia+St,+Reno+NV"
-                  target="_blank"
-                  className="inline-flex items-center gap-2 text-sandDune hover:text-linen"
-                >
-                  <MapPin className="h-4 w-4" />
-                  Open in Maps
-                </Link>
-                <Link
-                  href="https://www.instagram.com/atlaslanding/"
-                  target="_blank"
-                  className="inline-flex items-center gap-2 text-sandDune hover:text-linen"
-                >
-                  <Instagram className="h-4 w-4" />
-                  @atlaslanding
-                </Link>
-                <Link
-                  href="https://www.facebook.com/profile.php?id=100095380789651"
-                  target="_blank"
-                  className="inline-flex items-center gap-2 text-sandDune hover:text-linen"
-                >
-                  <Facebook className="h-4 w-4" />
-                  Facebook
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="motion-scale delay-1 overflow-hidden rounded-3xl border border-linen/20">
-            <iframe
-              title="Atlas Landing map"
-              src="https://www.google.com/maps?q=772+S+Virginia+St,+Reno,+NV+89509&output=embed"
-              className="h-full min-h-[430px] w-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+        <div className="events-quote">
+          <span>Good drinks.</span>
+          <span>Deep playlists.</span>
+          <span>Better company.</span>
         </div>
       </section>
 
-      <section id="contact" className="container pb-20">
-        <Card className="motion-up border-linen/20 bg-gunmetal/90 text-linen">
-          <div className="grid md:grid-cols-[1fr_1.1fr]">
-            <CardHeader className="border-b border-linen/15 md:border-b-0 md:border-r">
-              <p className="text-xs uppercase tracking-[0.25em] text-sandDune">Events & Inquiries</p>
-              <CardTitle className="font-display text-3xl md:text-4xl">
-                Tell us your night plan.
-              </CardTitle>
-              <p className="text-linen/80">
-                Private events, birthdays, large groups, and collaborations.
-                We will reply with options and timing.
-              </p>
-            </CardHeader>
-            <CardContent className="p-6 md:p-8">
-              <ContactForm />
-            </CardContent>
-          </div>
-        </Card>
+      <section className="visit section" id="visit">
+        <div className="section-label">04 / Visit</div>
+        <div className="visit-title">
+          <p className="eyebrow">Midtown Reno</p>
+          <h2>Meet us<br /><em>at Atlas.</em></h2>
+          <a className="text-link" href="https://maps.apple.com/?address=772%20S%20Virginia%20St,%20Reno,%20NV%2089501" target="_blank" rel="noreferrer">Open in Maps <Arrow /></a>
+        </div>
+        <div className="visit-details">
+          <div><span>Address</span><p>772 S Virginia St<br />Reno, NV 89509</p></div>
+          <div><span>Hours</span><p>Mon–Thu / 3–10 PM<br />Fri–Sat / 4 PM–12 AM<br />Sunday / Closed</p></div>
+          <div><span>Contact</span><p><a href="tel:+17752738146">(775) 273-8146</a><br /><a href="mailto:info@atlaslanding.bar">info@atlaslanding.bar</a></p></div>
+        </div>
       </section>
+
+      <footer>
+        <a className="footer-mark" href="#top">Atlas Landing</a>
+        <div className="footer-links">
+          <a href="https://www.instagram.com/atlaslanding/" target="_blank" rel="noreferrer">Instagram <Arrow /></a>
+          <a href="https://www.facebook.com/atlaslandingbar/" target="_blank" rel="noreferrer">Facebook <Arrow /></a>
+        </div>
+        <p>Midtown Reno, Nevada</p>
+      </footer>
     </main>
   );
 }

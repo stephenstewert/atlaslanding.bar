@@ -8,17 +8,16 @@ const LOADER_HTML_CLASS = "loader-active";
 const LOADER_FLAG_ATTR = "data-show-loader";
 
 function todayKey() {
-  return new Date().toISOString().slice(0, 10);
+  const now = new Date();
+  return [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0"),
+  ].join("-");
 }
 
 export function DailyLoader() {
-  const [isVisible, setIsVisible] = useState(() => {
-    if (typeof document === "undefined") {
-      return false;
-    }
-
-    return document.documentElement.getAttribute(LOADER_FLAG_ATTR) === "true";
-  });
+  const [isVisible, setIsVisible] = useState(false);
   const [animationData, setAnimationData] = useState<object | null>(null);
 
   useEffect(() => {
@@ -41,6 +40,12 @@ export function DailyLoader() {
     setIsVisible(true);
     window.localStorage.setItem(LOADER_STORAGE_KEY, today);
 
+    const failsafe = window.setTimeout(() => {
+      html.classList.remove(LOADER_HTML_CLASS);
+      html.setAttribute(LOADER_FLAG_ATTR, "false");
+      setIsVisible(false);
+    }, 8000);
+
     let cancelled = false;
     void import("@/data/atlas-loader-animation.json")
       .then((module) => {
@@ -60,6 +65,7 @@ export function DailyLoader() {
 
     return () => {
       cancelled = true;
+      window.clearTimeout(failsafe);
     };
   }, []);
 
@@ -77,10 +83,10 @@ export function DailyLoader() {
   return (
     <div
       data-loader-root
-      className="fixed inset-0 z-[1000] flex items-center justify-center bg-[#242424]"
+      className="atlas-loader"
     >
       {animationData ? (
-        <div className="h-screen w-screen">
+        <div className="atlas-loader-animation">
           <Lottie
             animationData={animationData}
             autoplay

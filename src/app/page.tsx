@@ -1,11 +1,28 @@
+import Image from "next/image";
+
 const Arrow = () => <span aria-hidden="true">↗</span>;
+
+const tickerItems = ["Beer", "Craft Cocktails", "Wine", "Snacks", "Midtown Reno"];
+
+const TickerGroup = ({ copy }: { copy: string }) => (
+  <div className="ticker-group">
+    {tickerItems.map((item) => (
+      <span className="ticker-item" key={`${copy}-${item}`}>
+        <span>{item}</span><i>•</i>
+      </span>
+    ))}
+  </div>
+);
 
 export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Atlas Landing home">
-          Atlas Landing
+        <a className="brand-link" href="#top" aria-label="Atlas Landing home">
+          <span className="brand-logo-wrap">
+            <Image className="brand-logo" src="/atlas-logo.svg" alt="" width={56} height={56} priority />
+          </span>
+          <span className="wordmark">Atlas Landing</span>
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
           <a href="#menu">Menu</a>
@@ -54,9 +71,9 @@ export default function Home() {
       </section>
 
       <div className="ticker" aria-hidden="true">
-        <div>
-          <span>Beer</span><i>•</i><span>Craft Cocktails</span><i>•</i><span>Wine</span><i>•</i><span>Snacks</span><i>•</i><span>Midtown Reno</span><i>•</i>
-          <span>Beer</span><i>•</i><span>Craft Cocktails</span><i>•</i><span>Wine</span><i>•</i><span>Snacks</span><i>•</i><span>Midtown Reno</span><i>•</i>
+        <div className="ticker-track">
+          <TickerGroup copy="a" />
+          <TickerGroup copy="b" />
         </div>
       </div>
 
@@ -76,6 +93,48 @@ export default function Home() {
             crisp, and social. From opening pours to last call, Atlas is built
             for a better neighborhood bar experience.
           </p>
+        </div>
+      </section>
+
+      <section className="photo-story" id="photos" aria-labelledby="photo-story-title">
+        <div className="photo-story-intro">
+          <div className="section-label">Inside Atlas</div>
+          <div>
+            <p className="eyebrow">From the bar</p>
+            <h2 id="photo-story-title">Poured, stocked,<br /><em>and ready.</em></h2>
+          </div>
+          <p className="photo-story-note">
+            A closer look at the bottles, pours, and late-night glow behind the bar.
+          </p>
+        </div>
+        <div className="photo-grid">
+          <figure className="photo-frame photo-backbar">
+            <Image
+              src="/atlas-backbar.jpg"
+              alt="Atlas Landing back bar with whiskey bottles and draft handles"
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
+            <figcaption><span>01</span> The back bar</figcaption>
+          </figure>
+          <figure className="photo-frame photo-pour">
+            <Image
+              src="/atlas-cocktail-pour.jpg"
+              alt="Bartender straining a cocktail at Atlas Landing"
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
+            <figcaption><span>02</span> Made to order</figcaption>
+          </figure>
+          <figure className="photo-frame photo-whiskey">
+            <Image
+              src="/atlas-whiskey-wall.jpg"
+              alt="Illuminated whiskey selection inside Atlas Landing"
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
+            <figcaption><span>03</span> Bottles worth asking about</figcaption>
+          </figure>
         </div>
       </section>
 

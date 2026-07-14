@@ -41,7 +41,7 @@ export default function RootLayout({
           {`try {
             var now = new Date();
             var today = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, "0"), String(now.getDate()).padStart(2, "0")].join("-");
-            var show = localStorage.getItem("atlas-loader-last-shown") !== today;
+            var show = localStorage.getItem("atlas-loader-last-shown-v2") !== today;
             document.documentElement.setAttribute("data-show-loader", show ? "true" : "false");
             if (show) document.documentElement.classList.add("loader-active");
           } catch (error) {

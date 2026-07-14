@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 
-const LOADER_STORAGE_KEY = "atlas-loader-last-shown";
+const LOADER_STORAGE_KEY = "atlas-loader-last-shown-v2";
 const LOADER_HTML_CLASS = "loader-active";
 const LOADER_FLAG_ATTR = "data-show-loader";
 

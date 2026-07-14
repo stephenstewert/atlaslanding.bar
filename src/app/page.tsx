@@ -1,6 +1,14 @@
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 
-const Arrow = () => <span aria-hidden="true">↗</span>;
+const Arrow = () => (
+  <ArrowUpRight
+    className="direction-icon"
+    aria-hidden="true"
+    focusable="false"
+    strokeWidth={1.7}
+  />
+);
 
 const tickerItems = ["Beer", "Craft Cocktails", "Wine", "Snacks", "Midtown Reno"];
 

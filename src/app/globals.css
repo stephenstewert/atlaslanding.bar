@@ -157,10 +157,10 @@ h2 em { color: var(--sage); font-weight: 400; }
 .featured-card .drink-list p { color: rgba(241,233,216,.72); }
 .compact-card { min-height: 470px; }
 .simple-list > div { display: flex; justify-content: space-between; gap: 30px; padding: 18px 0; border-top: 1px solid var(--line); font-size: 16px; }
-.snack-card { background: var(--brick); }
+.snack-card { grid-column: 1 / -1; min-height: 0; background: var(--brick); }
 .snack-card .card-top { color: var(--ivory); }
+.snack-card .simple-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 44px; }
 .snack-card .simple-list > div { border-color: rgba(241,233,216,.28); }
-.small-print { max-width: 540px; margin: 68px 0 0; color: rgba(241,233,216,.7); font-size: 13px; line-height: 1.7; }
 
 .events { min-height: 690px; display: grid; grid-template-columns: 1fr 1fr; background: var(--brick); }
 .events-copy { padding: 100px clamp(28px, 5.2vw, 82px); }
@@ -218,6 +218,8 @@ footer > p { justify-self: end; margin: 0; color: var(--sage); font-size: 12px; 
   .menu-grid { grid-template-columns: 1fr; }
   .menu-card { min-height: auto; padding: 30px 24px 42px; }
   .card-top { margin-bottom: 36px; }
+  .snack-card { grid-column: auto; }
+  .snack-card .simple-list { grid-template-columns: 1fr; }
   .events { grid-template-columns: 1fr; }
   .events-copy { padding: 80px 24px; }
   .events-copy .section-label { margin-bottom: 60px; }

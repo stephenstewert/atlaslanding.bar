@@ -22,6 +22,12 @@ export function DailyLoader() {
 
   useEffect(() => {
     const html = document.documentElement;
+    if (window.location.pathname.startsWith("/admin")) {
+      html.classList.remove(LOADER_HTML_CLASS);
+      html.setAttribute(LOADER_FLAG_ATTR, "false");
+      setIsVisible(false);
+      return;
+    }
     const shouldShowFromFlag = html.getAttribute(LOADER_FLAG_ATTR) === "true";
     const today = todayKey();
     const shouldShow =

@@ -141,26 +141,29 @@ h2 em { color: var(--sage); font-weight: 400; }
 .photo-pour img { object-position: center 47%; }
 .photo-whiskey img { object-position: center bottom; }
 
-.menu { background: var(--ink-soft); }
+.menu { --menu-gutter: clamp(28px, 5.2vw, 82px); padding: 130px var(--menu-gutter); background: var(--ink-soft); }
 .menu-intro { display: grid; grid-template-columns: 16% 50% 34%; align-items: start; margin-bottom: 80px; }
 .menu-note { max-width: 340px; margin: 58px 0 0 40px; color: rgba(241,233,216,.62); font-size: 16px; line-height: 1.7; }
-.menu-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-.menu-card { min-height: 590px; padding: 38px clamp(25px, 3.2vw, 52px) 46px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.featured-card { background: var(--forest); }
-.card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 54px; color: var(--sage); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
-.featured-card .card-top { color: rgba(241,233,216,.66); }
-.card-top p { margin: 0; }
-.drink-list > div { position: relative; display: grid; grid-template-columns: 1fr auto; padding: 20px 0; border-top: 1px solid rgba(241,233,216,.2); }
-.drink-list h3 { margin: 0; font-family: "Bodoni 72", Didot, Georgia, serif; font-size: clamp(26px, 2.5vw, 39px); font-weight: 400; }
-.drink-list strong, .simple-list strong { font-size: 13px; font-weight: 500; }
-.drink-list p { grid-column: 1 / -1; max-width: 460px; margin: 8px 0 0; color: rgba(241,233,216,.58); font-size: 13px; line-height: 1.5; }
-.featured-card .drink-list p { color: rgba(241,233,216,.72); }
-.compact-card { min-height: 470px; }
-.simple-list > div { display: flex; justify-content: space-between; gap: 30px; padding: 18px 0; border-top: 1px solid var(--line); font-size: 16px; }
-.snack-card { grid-column: 1 / -1; min-height: 0; background: var(--brick); }
-.snack-card .card-top { color: var(--ivory); }
-.snack-card .simple-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 44px; }
-.snack-card .simple-list > div { border-color: rgba(241,233,216,.28); }
+.menu-catalog { border-top: 1px solid var(--line); }
+.menu-chapter { display: grid; grid-template-columns: minmax(220px, 28%) 1fr; gap: clamp(42px, 6vw, 100px); padding: 68px 0 76px; border-bottom: 1px solid var(--line); }
+.menu-chapter--featured, .menu-chapter--accent { margin-inline: calc(var(--menu-gutter) * -1); padding-inline: var(--menu-gutter); border: 0; }
+.menu-chapter--featured { background: var(--forest); }
+.menu-chapter--accent { background: var(--brick); }
+.menu-chapter-head { position: sticky; top: 120px; align-self: start; }
+.menu-chapter-label { margin: 0 0 26px; color: var(--sage); font-size: 11px; font-weight: 650; letter-spacing: .2em; text-transform: uppercase; }
+.menu-chapter--featured .menu-chapter-label { color: rgba(241,233,216,.65); }
+.menu-chapter--accent .menu-chapter-label { color: var(--ink); }
+.menu-chapter-head h3 { max-width: 320px; margin: 0; font-family: "Bodoni 72", Didot, "Iowan Old Style", Georgia, serif; font-size: clamp(43px, 4.5vw, 72px); font-weight: 400; letter-spacing: -.04em; line-height: .95; }
+.menu-items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(28px, 4vw, 66px); align-content: start; }
+.menu-entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 22px; align-content: start; min-height: 76px; padding: 18px 0 20px; border-top: 1px solid var(--line); transition: border-color .2s ease; }
+.menu-entry:hover { border-color: var(--sage); }
+.menu-entry h4 { margin: 0; font-family: "Bodoni 72", Didot, Georgia, serif; font-size: clamp(23px, 2vw, 32px); font-weight: 400; letter-spacing: -.02em; line-height: 1.08; transition: transform .2s ease; }
+.menu-entry:hover h4 { transform: translateX(4px); }
+.menu-entry strong { padding-top: 5px; font-size: 13px; font-weight: 500; }
+.menu-entry p { grid-column: 1 / -1; max-width: 440px; margin: 10px 0 0; color: rgba(241,233,216,.58); font-size: 13px; line-height: 1.55; }
+.menu-chapter--featured .menu-entry { border-color: rgba(241,233,216,.25); }
+.menu-chapter--featured .menu-entry p { color: rgba(241,233,216,.72); }
+.menu-chapter--accent .menu-entry { border-color: rgba(241,233,216,.3); }
 
 .events { min-height: 690px; display: grid; grid-template-columns: 1fr 1fr; background: var(--brick); }
 .events-copy { padding: 100px clamp(28px, 5.2vw, 82px); }
@@ -213,13 +216,16 @@ footer > p { justify-self: end; margin: 0; color: var(--sage); font-size: 12px; 
   .photo-grid { grid-template-columns: 1fr; grid-template-rows: 62svh 58svh 58svh; }
   .photo-backbar, .photo-pour, .photo-whiskey { grid-column: 1; grid-row: auto; }
   .photo-frame figcaption { right: 24px; bottom: 22px; left: 24px; }
+  .menu { --menu-gutter: 24px; padding: 88px var(--menu-gutter); }
   .menu-intro { gap: 48px; margin-bottom: 56px; }
   .menu-note { margin: 0; }
-  .menu-grid { grid-template-columns: 1fr; }
-  .menu-card { min-height: auto; padding: 30px 24px 42px; }
-  .card-top { margin-bottom: 36px; }
-  .snack-card { grid-column: auto; }
-  .snack-card .simple-list { grid-template-columns: 1fr; }
+  .menu-chapter { grid-template-columns: 1fr; gap: 38px; padding: 56px 0 64px; }
+  .menu-chapter--featured, .menu-chapter--accent { padding-inline: var(--menu-gutter); }
+  .menu-chapter-head { position: static; }
+  .menu-chapter-label { margin-bottom: 20px; }
+  .menu-chapter-head h3 { font-size: 48px; }
+  .menu-items { grid-template-columns: 1fr; }
+  .menu-entry { min-height: 0; padding: 18px 0 20px; }
   .events { grid-template-columns: 1fr; }
   .events-copy { padding: 80px 24px; }
   .events-copy .section-label { margin-bottom: 60px; }

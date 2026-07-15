@@ -22,93 +22,6 @@ const TickerGroup = ({ copy }: { copy: string }) => (
   </div>
 );
 
-type MenuItem = {
-  name: string;
-  price?: string;
-  description?: string;
-};
-
-type MenuSection = {
-  number: string;
-  label: string;
-  title: string;
-  tone?: "featured" | "accent";
-  items: MenuItem[];
-};
-
-const menuSections: MenuSection[] = [
-  {
-    number: "01",
-    label: "Cocktails",
-    title: "House Signatures",
-    tone: "featured",
-    items: [
-      { name: "Midnight 75", price: "$14", description: "Gray Whale Gin, lemon, simple, blackberry puree, bubbles" },
-      { name: "Passion Spark", price: "$14", description: "Platinum Vodka, Passoa, lime, agave, sparkling water" },
-      { name: "Heatwave", price: "$13", description: "Corazon Tequila, jalapeño, agave, lime, ginger beer" },
-      { name: "Blood Orange Spritz", price: "$14", description: "Aperol, SP Blood Orange, Wycliff Brut, sparkling water" },
-    ],
-  },
-  {
-    number: "02",
-    label: "Cocktails",
-    title: "Seasonal Creations",
-    items: [
-      { name: "Garden Society", price: "$15", description: "Ketel Cucumber Mint, lemon, raspberry, black tea, sparkling" },
-      { name: "In Bloom", price: "$15", description: "Fris Vodka, Grind Coffee Liquor, Bailey’s, lavender, espresso" },
-      { name: "Wildflower Sour", price: "$15", description: "Jameson, elderflower, honey, lemon, pomegranate foam" },
-      { name: "Honeyglass", price: "$14", description: "Corazon Tequila, Aperol, lemon, honey, orange bitters" },
-    ],
-  },
-  {
-    number: "03",
-    label: "By the Glass",
-    title: "Wine",
-    items: [
-      { name: "Benvolio Prosecco", price: "$13" },
-      { name: "La Marca Prosecco", price: "$13" },
-      { name: "Los Morros Sauv Blanc", price: "$13" },
-      { name: "Los Morros Cabernet", price: "$13" },
-      { name: "Valderba Garnacha", price: "$13" },
-      { name: "Kransno Merlot", price: "$13" },
-      { name: "Conundrum Red Blend", price: "$13" },
-      { name: "Avaline Cabernet", price: "$14" },
-      { name: "La Crema Pinot Noir", price: "$13" },
-      { name: "Lucien Albrecht Brut Rose", price: "$14" },
-    ],
-  },
-  {
-    number: "04",
-    label: "On Draft",
-    title: "Beer",
-    items: [
-      { name: "Boneyard IPA", price: "$8" },
-      { name: "Voodoo Ranger IPA", price: "$8" },
-      { name: "Sierra Nevada Pilsner", price: "$7" },
-      { name: "Sierra Nevada Hazy IPA", price: "$8" },
-      { name: "Modelo", price: "$7" },
-      { name: "Sapporo", price: "$8" },
-      { name: "805 Blonde", price: "$8" },
-      { name: "805 Cerveza", price: "$8" },
-      { name: "Cali Squeeze Blood Orange", price: "$8" },
-      { name: "Deschutes Porter", price: "$8" },
-      { name: "Boneyard Red Ale", price: "$8" },
-      { name: "Guinness", price: "$8" },
-    ],
-  },
-  {
-    number: "05",
-    label: "At the Bar",
-    title: "Snacks",
-    tone: "accent",
-    items: [
-      { name: "Peanuts" },
-      { name: "Pub Mix" },
-      { name: "Obour Hummus & Pita Chips", price: "$12" },
-    ],
-  },
-];
-
 export default function Home() {
   return (
     <main>
@@ -243,27 +156,69 @@ export default function Home() {
           <p className="menu-note">Seasonal ingredients, straightforward pours, and a back bar that rewards curiosity.</p>
         </div>
 
-        <div className="menu-catalog">
-          {menuSections.map((section) => (
-            <article
-              className={`menu-chapter${section.tone ? ` menu-chapter--${section.tone}` : ""}`}
-              key={section.title}
-            >
-              <header className="menu-chapter-head">
-                <p className="menu-chapter-label">{section.number} / {section.label}</p>
-                <h3>{section.title}</h3>
-              </header>
-              <div className="menu-items">
-                {section.items.map((item) => (
-                  <div className="menu-entry" key={item.name}>
-                    <h4>{item.name}</h4>
-                    {item.price ? <strong>{item.price}</strong> : null}
-                    {item.description ? <p>{item.description}</p> : null}
-                  </div>
-                ))}
-              </div>
-            </article>
-          ))}
+        <div className="menu-grid">
+          <article className="menu-card featured-card">
+            <div className="card-top"><span>01</span><p>House Signatures</p></div>
+            <div className="drink-list">
+              <div><h3>Midnight 75</h3><strong>$14</strong><p>Gray Whale Gin, lemon, simple, blackberry puree, bubbles</p></div>
+              <div><h3>Passion Spark</h3><strong>$14</strong><p>Platinum Vodka, Passoa, lime, agave, sparkling water</p></div>
+              <div><h3>Heatwave</h3><strong>$13</strong><p>Corazon Tequila, jalapeño, agave, lime, ginger beer</p></div>
+              <div><h3>Blood Orange Spritz</h3><strong>$14</strong><p>Aperol, SP Blood Orange, Wycliff Brut, sparkling water</p></div>
+            </div>
+          </article>
+
+          <article className="menu-card">
+            <div className="card-top"><span>02</span><p>Seasonal Creations</p></div>
+            <div className="drink-list">
+              <div><h3>Garden Society</h3><strong>$15</strong><p>Ketel Cucumber Mint, lemon, raspberry, black tea, sparkling</p></div>
+              <div><h3>In Bloom</h3><strong>$15</strong><p>Fris Vodka, Grind Coffee Liquor, Bailey’s, lavender, espresso</p></div>
+              <div><h3>Wildflower Sour</h3><strong>$15</strong><p>Jameson, elderflower, honey, lemon, pomegranate foam</p></div>
+              <div><h3>Honeyglass</h3><strong>$14</strong><p>Corazon Tequila, Aperol, lemon, honey, orange bitters</p></div>
+            </div>
+          </article>
+
+          <article className="menu-card compact-card">
+            <div className="card-top"><span>03</span><p>Wines by the Glass</p></div>
+            <div className="simple-list">
+              <div><span>Benvolio Prosecco</span><strong>$13</strong></div>
+              <div><span>La Marca Prosecco</span><strong>$13</strong></div>
+              <div><span>Los Morros Sauv Blanc</span><strong>$13</strong></div>
+              <div><span>Los Morros Cabernet</span><strong>$13</strong></div>
+              <div><span>Valderba Garnacha</span><strong>$13</strong></div>
+              <div><span>Kransno Merlot</span><strong>$13</strong></div>
+              <div><span>Conundrum Red Blend</span><strong>$13</strong></div>
+              <div><span>Avaline Cabernet</span><strong>$14</strong></div>
+              <div><span>La Crema Pinot Noir</span><strong>$13</strong></div>
+              <div><span>Lucien Albrecht Brut Rose</span><strong>$14</strong></div>
+            </div>
+          </article>
+
+          <article className="menu-card compact-card">
+            <div className="card-top"><span>04</span><p>Draft Beer</p></div>
+            <div className="simple-list">
+              <div><span>Boneyard IPA</span><strong>$8</strong></div>
+              <div><span>Voodoo Ranger IPA</span><strong>$8</strong></div>
+              <div><span>Sierra Nevada Pilsner</span><strong>$7</strong></div>
+              <div><span>Sierra Nevada Hazy IPA</span><strong>$8</strong></div>
+              <div><span>Modelo</span><strong>$7</strong></div>
+              <div><span>Sapporo</span><strong>$8</strong></div>
+              <div><span>805 Blonde</span><strong>$8</strong></div>
+              <div><span>805 Cerveza</span><strong>$8</strong></div>
+              <div><span>Cali Squeeze Blood Orange</span><strong>$8</strong></div>
+              <div><span>Deschutes Porter</span><strong>$8</strong></div>
+              <div><span>Boneyard Red Ale</span><strong>$8</strong></div>
+              <div><span>Guinness</span><strong>$8</strong></div>
+            </div>
+          </article>
+
+          <article className="menu-card compact-card snack-card">
+            <div className="card-top"><span>05</span><p>Snacks</p></div>
+            <div className="simple-list">
+              <div><span>Peanuts</span></div>
+              <div><span>Pub Mix</span></div>
+              <div><span>Obour Hummus & Pita Chips</span><strong>$12</strong></div>
+            </div>
+          </article>
         </div>
       </section>
 

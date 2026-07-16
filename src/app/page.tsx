@@ -1,5 +1,10 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { cloverConfigured } from "@/lib/clover";
+import { loadCloverMenu } from "@/lib/clover-menu";
+import { defaultMenuSections, MenuSection } from "@/lib/menu";
+
+export const dynamic = "force-dynamic";
 
 const Arrow = () => (
   <ArrowUpRight
@@ -22,7 +27,25 @@ const TickerGroup = ({ copy }: { copy: string }) => (
   </div>
 );
 
-export default function Home() {
+function menuPrice(price: number) {
+  if (!price) return "";
+  const dollars = price / 100;
+  return `$${Number.isInteger(dollars) ? dollars : dollars.toFixed(2)}`;
+}
+
+async function publicMenu(): Promise<MenuSection[]> {
+  if (!cloverConfigured()) return defaultMenuSections();
+  try {
+    return await loadCloverMenu({ bootstrap: false });
+  } catch (error) {
+    console.error("Using the fallback menu because Clover could not be reached.", error);
+    return defaultMenuSections();
+  }
+}
+
+export default async function Home() {
+  const menuSections = await publicMenu();
+
   return (
     <main>
       <header className="site-header">
@@ -156,67 +179,34 @@ export default function Home() {
         </div>
 
         <div className="menu-grid">
-          <article className="menu-card featured-card">
-            <div className="card-top"><span>01</span><p>House Signatures</p></div>
-            <div className="drink-list">
-              <div><h3>Midnight 75</h3><strong>$14</strong><p>Gray Whale Gin, lemon, simple, blackberry puree, bubbles</p></div>
-              <div><h3>Passion Spark</h3><strong>$14</strong><p>Platinum Vodka, Passoa, lime, agave, sparkling water</p></div>
-              <div><h3>Heatwave</h3><strong>$13</strong><p>Corazon Tequila, jalapeño, agave, lime, ginger beer</p></div>
-              <div><h3>Blood Orange Spritz</h3><strong>$14</strong><p>Aperol, SP Blood Orange, Wycliff Brut, sparkling water</p></div>
-            </div>
-          </article>
-
-          <article className="menu-card">
-            <div className="card-top"><span>02</span><p>Seasonal Creations</p></div>
-            <div className="drink-list">
-              <div><h3>Garden Society</h3><strong>$15</strong><p>Ketel Cucumber Mint, lemon, raspberry, black tea, sparkling</p></div>
-              <div><h3>In Bloom</h3><strong>$15</strong><p>Fris Vodka, Grind Coffee Liquor, Bailey’s, lavender, espresso</p></div>
-              <div><h3>Wildflower Sour</h3><strong>$15</strong><p>Jameson, elderflower, honey, lemon, pomegranate foam</p></div>
-              <div><h3>Honeyglass</h3><strong>$14</strong><p>Corazon Tequila, Aperol, lemon, honey, orange bitters</p></div>
-            </div>
-          </article>
-
-          <article className="menu-card compact-card">
-            <div className="card-top"><span>03</span><p>Wines by the Glass</p></div>
-            <div className="simple-list">
-              <div><span>Benvolio Prosecco</span><strong>$13</strong></div>
-              <div><span>La Marca Prosecco</span><strong>$13</strong></div>
-              <div><span>Los Morros Sauv Blanc</span><strong>$13</strong></div>
-              <div><span>Los Morros Cabernet</span><strong>$13</strong></div>
-              <div><span>Valderba Garnacha</span><strong>$13</strong></div>
-              <div><span>Kransno Merlot</span><strong>$13</strong></div>
-              <div><span>Conundrum Red Blend</span><strong>$13</strong></div>
-              <div><span>Avaline Cabernet</span><strong>$14</strong></div>
-              <div><span>La Crema Pinot Noir</span><strong>$13</strong></div>
-              <div><span>Lucien Albrecht Brut Rose</span><strong>$14</strong></div>
-            </div>
-          </article>
-
-          <article className="menu-card compact-card">
-            <div className="card-top"><span>04</span><p>Draft Beer</p></div>
-            <div className="simple-list">
-              <div><span>Boneyard IPA</span><strong>$8</strong></div>
-              <div><span>Voodoo Ranger IPA</span><strong>$8</strong></div>
-              <div><span>Sierra Nevada Pilsner</span><strong>$7</strong></div>
-              <div><span>Sierra Nevada Hazy IPA</span><strong>$8</strong></div>
-              <div><span>Modelo</span><strong>$7</strong></div>
-              <div><span>Sapporo</span><strong>$8</strong></div>
-              <div><span>805 Blonde</span><strong>$8</strong></div>
-              <div><span>805 Cerveza</span><strong>$8</strong></div>
-              <div><span>Cali Squeeze Blood Orange</span><strong>$8</strong></div>
-              <div><span>Deschutes Porter</span><strong>$8</strong></div>
-              <div><span>Boneyard Red Ale</span><strong>$8</strong></div>
-              <div><span>Guinness</span><strong>$8</strong></div>
-            </div>
-          </article>
-
-          <article className="menu-card compact-card snack-card">
-            <div className="card-top"><span>05</span><p>Snacks</p></div>
-            <div className="simple-list">
-              <div><span>Peanuts</span></div>
-              <div><span>Pub Mix</span></div>
-            </div>
-          </article>
+          {menuSections.map((section) => {
+            const cocktails = section.id === "signatures" || section.id === "seasonal";
+            const className = [
+              "menu-card",
+              section.id === "signatures" ? "featured-card" : "",
+              cocktails ? "" : "compact-card",
+              section.id === "snacks" ? "snack-card" : "",
+            ].filter(Boolean).join(" ");
+            return (
+              <article className={className} key={section.id}>
+                <div className="card-top"><span>{section.number}</span><p>{section.title}</p></div>
+                <div className={cocktails ? "drink-list" : "simple-list"}>
+                  {section.items.map((item) => cocktails ? (
+                    <div key={item.id}>
+                      <h3>{item.name}</h3>
+                      {item.price ? <strong>{menuPrice(item.price)}</strong> : null}
+                      {item.description ? <p>{item.description}</p> : null}
+                    </div>
+                  ) : (
+                    <div key={item.id}>
+                      <span>{item.name}</span>
+                      {item.price ? <strong>{menuPrice(item.price)}</strong> : null}
+                    </div>
+                  ))}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 

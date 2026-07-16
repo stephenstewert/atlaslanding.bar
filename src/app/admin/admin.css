@@ -117,6 +117,102 @@
 .admin-secondary { min-height: 52px; background: transparent; color: #3b4741; padding: 0 20px; border: 1px solid rgba(24,32,29,.22); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .admin-secondary:hover { border-color: #18201d; }
 
+.admin-main--visual { width: min(100%, 1540px); }
+.admin-heading--visual { margin-bottom: 34px; }
+.visual-toolbar {
+  position: sticky;
+  top: 78px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 0 28px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(24,32,29,.18);
+  border-bottom: 1px solid rgba(24,32,29,.18);
+  background: rgba(242,237,226,.94);
+  backdrop-filter: blur(14px);
+  color: #66706a;
+  font-size: 12px;
+}
+.visual-toolbar > div { display: flex; align-items: center; gap: 10px; }
+.visual-toolbar .admin-primary { min-height: 46px; }
+.visual-live-dot { width: 7px; height: 7px; border-radius: 50%; background: #738d72; box-shadow: 0 0 0 4px rgba(115,141,114,.14); }
+.visual-pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 38px); align-items: start; }
+.visual-page {
+  min-width: 0;
+  aspect-ratio: 612 / 792;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: clamp(24px, 3.1vw, 46px) clamp(20px, 2.5vw, 36px) 26px;
+  background: #19211e;
+  color: #f1e9d8;
+  box-shadow: 0 24px 60px rgba(24,32,29,.18);
+}
+.visual-page-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; text-transform: uppercase; }
+.visual-page-top span { display: inline-flex; align-items: center; gap: 10px; font-family: "Bodoni 72", Didot, Georgia, serif; font-size: clamp(17px, 1.55vw, 25px); letter-spacing: .06em; }
+.visual-page-top span img { width: .7em; height: .9em; object-fit: contain; filter: invert(96%) sepia(10%) saturate(580%) hue-rotate(348deg) brightness(99%) contrast(91%); }
+.visual-page-top i { color: #a4472e; font-size: 9px; font-style: normal; font-weight: 700; letter-spacing: .18em; }
+.visual-page-title { margin: clamp(30px, 4vw, 58px) 0 clamp(20px, 2.5vw, 38px); font-family: "Bodoni 72", Didot, Georgia, serif; font-size: clamp(38px, 4.4vw, 66px); font-weight: 400; letter-spacing: -.04em; line-height: .9; }
+.visual-page-title em { color: #738d72; font-style: normal; }
+.visual-page-sections { display: grid; flex: 1; grid-template-rows: 1fr 1fr; gap: 18px; min-height: 0; }
+.visual-page-two-columns { display: grid; flex: 1; grid-template-columns: 1fr 1fr; gap: 14px; min-height: 0; }
+.visual-page-address { margin: 22px 0 0; color: #738d72; font-size: 8px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.visual-section { position: relative; min-width: 0; overflow: hidden; border: 1px solid #46504c; background: #19211e; }
+.visual-section--featured { border-color: #738d72; background: #3e5947; }
+.visual-section--snacks { flex: none; min-height: 94px; margin-top: 14px; border: 0; background: #a4472e; }
+.visual-section-head { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 20px 14px; color: #738d72; font-size: 8px; letter-spacing: .18em; text-transform: uppercase; }
+.visual-section--featured .visual-section-head, .visual-section--snacks .visual-section-head { color: rgba(241,233,216,.78); }
+.visual-section-head h2 { margin: 0; font-family: var(--font-geist-sans), Arial, sans-serif; font-size: 8px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.visual-add { position: absolute; top: 8px; right: 8px; display: grid; width: 30px; height: 30px; place-items: center; border: 0; background: #f1e9d8; color: #18201d; cursor: pointer; opacity: 0; transform: translateY(-4px); transition: opacity .18s ease, transform .18s ease, background .18s ease; }
+.visual-add:hover { background: #fff8e9; }
+.visual-add svg { width: 15px; }
+.visual-section:hover .visual-add, .visual-section:focus-within .visual-add { opacity: 1; transform: none; }
+.visual-items { min-height: 0; padding: 0 20px 18px; }
+.visual-section--cocktails .visual-items { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+.visual-section--list .visual-items { display: block; }
+.visual-section--snacks .visual-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 18px; padding-bottom: 16px; }
+.visual-section--cocktails:has(.visual-item:nth-child(n + 7)) .visual-item { padding-block: 9px 8px; }
+.visual-section--cocktails:has(.visual-item:nth-child(n + 7)) .visual-item h3 { font-size: clamp(14px, 1.35vw, 20px); }
+.visual-section--list:has(.visual-item:nth-child(n + 13)) .visual-item { padding-block: 9px 8px; }
+.visual-section--list:has(.visual-item:nth-child(n + 15)) .visual-item { padding-block: 6px 5px; }
+.visual-item { position: relative; min-width: 0; display: flex; align-items: start; justify-content: space-between; gap: 10px; padding: 14px 0 12px; border-top: 1px solid rgba(241,233,216,.19); cursor: text; transition: background .16s ease; }
+.visual-item:hover { background: rgba(241,233,216,.035); }
+.visual-item-copy { min-width: 0; }
+.visual-item h3 { margin: 0; overflow: hidden; font-family: "Bodoni 72", Didot, Georgia, serif; font-size: clamp(17px, 1.65vw, 25px); font-weight: 400; line-height: 1; text-overflow: ellipsis; }
+.visual-section--list .visual-item h3, .visual-section--snacks .visual-item h3 { font-size: clamp(13px, 1.22vw, 18px); }
+.visual-item p { display: -webkit-box; margin: 7px 0 0; overflow: hidden; color: rgba(241,233,216,.64); font-size: 8px; line-height: 1.4; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.visual-item strong { flex: none; font-size: 8px; font-weight: 600; }
+.visual-item-actions { position: absolute; inset: 6px 4px auto auto; display: flex; gap: 4px; padding: 3px; background: #f1e9d8; opacity: 0; transform: translateY(-3px); transition: opacity .16s ease, transform .16s ease; }
+.visual-item:hover .visual-item-actions, .visual-item:focus-within .visual-item-actions { opacity: 1; transform: none; }
+.visual-item-actions button, .visual-edit-actions button { display: grid; width: 28px; height: 28px; place-items: center; border: 0; background: transparent; color: #18201d; cursor: pointer; }
+.visual-item-actions button:hover { background: rgba(24,32,29,.1); }
+.visual-item-actions .visual-delete:hover { background: #a4472e; color: #f1e9d8; }
+.visual-item-actions svg, .visual-edit-actions svg { width: 14px; }
+.visual-item--editing { z-index: 2; display: grid; grid-template-columns: 1fr 72px; gap: 10px; padding: 12px; background: #f8f4eb; color: #18201d; cursor: default; box-shadow: 0 12px 34px rgba(0,0,0,.2); }
+.visual-edit-main { display: grid; gap: 9px; }
+.visual-item--editing label { display: grid; gap: 4px; }
+.visual-item--editing label > span:first-child { color: #6b736f; font-size: 7px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+.visual-item--editing input, .visual-item--editing textarea { width: 100%; border: 0; border-bottom: 1px solid rgba(24,32,29,.26); border-radius: 0; outline: 0; background: transparent; color: #18201d; padding: 5px 0; resize: none; }
+.visual-item--editing input:focus, .visual-item--editing textarea:focus { border-color: #3e5947; }
+.visual-edit-main input { font-family: "Bodoni 72", Didot, Georgia, serif; font-size: 18px; }
+.visual-edit-main textarea { font-size: 10px; line-height: 1.4; }
+.visual-price-field { align-self: start; }
+.visual-price-input { display: flex; align-items: center; border-bottom: 1px solid rgba(24,32,29,.26); }
+.visual-price-input i { color: #6b736f; font-size: 12px; font-style: normal; }
+.visual-price-input input { min-width: 0; border: 0; padding-left: 3px; }
+.visual-edit-actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 4px; }
+.visual-edit-actions button:first-child { background: #3e5947; color: #f1e9d8; }
+.visual-edit-actions button:last-child { background: rgba(24,32,29,.08); }
+.visual-empty { width: 100%; min-height: 58px; border: 1px dashed rgba(241,233,216,.28); background: transparent; color: rgba(241,233,216,.68); cursor: pointer; font-size: 10px; }
+.visual-loading { min-height: 440px; display: grid; place-items: center; align-content: center; gap: 14px; color: #66706a; }
+.visual-loading svg { width: 24px; }
+.admin-spin { animation: adminSpin .8s linear infinite; }
+
+@keyframes adminSpin { to { transform: rotate(360deg); } }
+
 @keyframes adminFade { from { opacity: 0; } }
 @keyframes adminSlide { from { opacity: .8; transform: translateX(30px); } }
 
@@ -141,6 +237,10 @@
   .admin-icon-button { grid-column: 2; grid-row: 1 / 4; }
   .admin-form-grid { grid-template-columns: 1fr; }
   .admin-form-grid .admin-field:first-child { grid-column: auto; }
+  .visual-toolbar { top: 68px; }
+  .visual-pages { grid-template-columns: 1fr; }
+  .visual-page { min-height: 720px; aspect-ratio: auto; }
+  .visual-add, .visual-item-actions { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

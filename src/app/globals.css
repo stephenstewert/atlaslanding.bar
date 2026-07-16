@@ -159,7 +159,7 @@ h2 em { color: var(--sage); font-weight: 400; }
 .simple-list > div { display: flex; justify-content: space-between; gap: 30px; padding: 18px 0; border-top: 1px solid var(--line); font-size: 16px; }
 .snack-card { grid-column: 1 / -1; min-height: 0; background: var(--brick); }
 .snack-card .card-top { color: var(--ivory); }
-.snack-card .simple-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 44px; }
+.snack-card .simple-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 44px; }
 .snack-card .simple-list > div { border-color: rgba(241,233,216,.28); }
 
 .events { min-height: 690px; display: grid; grid-template-columns: 1fr 1fr; background: var(--brick); }
@@ -185,7 +185,11 @@ footer { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; g
 .footer-mark { font-family: "Bodoni 72 Smallcaps", "Bodoni 72", Didot, Georgia, serif; font-size: clamp(42px, 6.5vw, 108px); line-height: .85; text-transform: uppercase; letter-spacing: .03em; }
 .footer-links { display: flex; gap: 24px; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; }
 .footer-links a { display: inline-flex; align-items: center; gap: 8px; }
-footer > p { justify-self: end; margin: 0; color: var(--sage); font-size: 12px; text-transform: uppercase; letter-spacing: .16em; }
+.footer-meta { justify-self: end; text-align: right; }
+.footer-meta p { margin: 0; color: var(--sage); font-size: 12px; text-transform: uppercase; letter-spacing: .16em; }
+.footer-meta p + p { margin-top: 10px; color: rgba(241,233,216,.48); font-size: 10px; }
+.footer-meta a { color: var(--ivory); transition: color .2s ease; }
+.footer-meta a:hover, .footer-meta a:focus-visible { color: var(--brick); }
 
 @media (max-width: 900px) {
   .site-header { height: 76px; display: flex; justify-content: space-between; background: rgba(17,23,21,.88); backdrop-filter: blur(12px); position: fixed; }
@@ -228,7 +232,7 @@ footer > p { justify-self: end; margin: 0; color: var(--sage); font-size: 12px; 
   .visit-details { padding: 32px 0 0; border-left: 0; border-top: 1px solid rgba(17,23,21,.25); }
   footer { grid-template-columns: 1fr; align-items: start; padding-top: 60px; }
   .footer-links { margin-top: 30px; }
-  footer > p { justify-self: start; margin-top: 20px; }
+  .footer-meta { justify-self: start; margin-top: 20px; text-align: left; }
 }
 
 @media (max-width: 520px) {

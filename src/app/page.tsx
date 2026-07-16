@@ -150,7 +150,6 @@ export default function Home() {
         <div className="menu-intro">
           <div className="section-label">02 / Now pouring</div>
           <div>
-            <p className="eyebrow">Current Menu</p>
             <h2>Drinks worth<br /><em>staying for.</em></h2>
           </div>
           <p className="menu-note">Seasonal ingredients, straightforward pours, and a back bar that rewards curiosity.</p>
@@ -216,7 +215,6 @@ export default function Home() {
             <div className="simple-list">
               <div><span>Peanuts</span></div>
               <div><span>Pub Mix</span></div>
-              <div><span>Obour Hummus & Pita Chips</span><strong>$12</strong></div>
             </div>
           </article>
         </div>
@@ -251,13 +249,18 @@ export default function Home() {
         </div>
       </section>
 
-      <footer>
+      <footer id="site-footer">
         <a className="footer-mark" href="#top">Atlas Landing</a>
         <div className="footer-links">
           <a href="https://www.instagram.com/atlaslanding/" target="_blank" rel="noreferrer">Instagram <Arrow /></a>
           <a href="https://www.facebook.com/atlaslandingbar/" target="_blank" rel="noreferrer">Facebook <Arrow /></a>
         </div>
-        <p>Midtown Reno, Nevada</p>
+        <div className="footer-meta">
+          <p>Midtown Reno, Nevada</p>
+          <p>
+            Made by <a href="https://snoball.media" target="_blank" rel="noreferrer">Snoball Media</a>
+          </p>
+        </div>
       </footer>
     </main>
   );

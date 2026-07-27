@@ -141,7 +141,7 @@ export default async function Home() {
         <div className="photo-grid">
           <figure className="photo-frame photo-backbar">
             <Image
-              src="/atlas-backbar.jpg"
+              src="/atlas-backbar.avif"
               alt="Atlas Landing back bar with whiskey bottles and draft handles"
               fill
               sizes="(max-width: 900px) 100vw, 50vw"
@@ -150,7 +150,7 @@ export default async function Home() {
           </figure>
           <figure className="photo-frame photo-pour">
             <Image
-              src="/atlas-cocktail-pour.jpg"
+              src="/atlas-cocktail-pour.avif"
               alt="Bartender straining a cocktail at Atlas Landing"
               fill
               sizes="(max-width: 900px) 100vw, 50vw"
@@ -159,7 +159,7 @@ export default async function Home() {
           </figure>
           <figure className="photo-frame photo-whiskey">
             <Image
-              src="/atlas-whiskey-wall.jpg"
+              src="/atlas-whiskey-wall.avif"
               alt="Illuminated whiskey selection inside Atlas Landing"
               fill
               sizes="(max-width: 900px) 100vw, 50vw"

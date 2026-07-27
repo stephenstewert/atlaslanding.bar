@@ -21,7 +21,7 @@
 - Fonts and typography: Geist is loaded through `next/font`; Bodoni/Didot system fallbacks, weights, sizes, line heights, tracking, and wrapping match the source.
 - Spacing and layout rhythm: desktop and mobile grids, hero proportions, section padding, menu borders, and responsive stacking match the source comparisons.
 - Colors and visual tokens: ink, ivory, sage, forest, brick, borders, gradients, and opacity values match the supplied stylesheet.
-- Image quality and asset fidelity: the original supplied `atlas-interior.jpg` is used with the source crop and overlays; no image substitutes are present.
+- Image quality and asset fidelity: the original supplied interior photo is preserved as `atlas-interior.avif` with the source crop and overlays; no image substitutes are present.
 - Copy and content: navigation, hero, ticker, story, complete visible menu, events, visit details, and footer match the source.
 - The only desktop-capture artifact is the Next.js development indicator at the lower-left of the implementation screenshot. It is development-only, absent from the production build, and does not ship.
 

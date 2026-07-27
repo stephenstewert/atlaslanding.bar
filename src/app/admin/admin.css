@@ -22,7 +22,7 @@
   justify-content: space-between;
   overflow: hidden;
   padding: 46px;
-  background: linear-gradient(180deg, rgba(13,19,17,.12), rgba(13,19,17,.82)), url('/atlas-backbar.jpg') center / cover;
+  background: linear-gradient(180deg, rgba(13,19,17,.12), rgba(13,19,17,.82)), url('/atlas-backbar.avif') center / cover;
   color: #f1e9d8;
 }
 
